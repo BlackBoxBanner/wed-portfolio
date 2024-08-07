@@ -33,10 +33,6 @@ const navigator: MenuNavigator[] = [
     title: "Project",
     link: "#project",
   },
-  {
-    title: "Blog",
-    link: "/blog",
-  },
 ];
 
 const Menu = () => {
