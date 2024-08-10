@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Maitree as FontSans} from "next/font/google";
+import {Outfit as FontSans} from "next/font/google";
 import "./globals.css";
 import {cn} from "@/lib/utils";
 import Menu from "@/components/menu";
@@ -7,7 +7,7 @@ import {Toaster} from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
-  weight: "300",
+  weight: ["300"],
   variable: "--font-sans",
 });
 
