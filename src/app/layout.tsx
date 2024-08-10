@@ -3,6 +3,7 @@ import {Maitree as FontSans} from "next/font/google";
 import "./globals.css";
 import {cn} from "@/lib/utils";
 import Menu from "@/components/menu";
+import {Toaster} from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased text-lg",
           fontSans.variable
         )}>
+        <Toaster />
         <Menu />
         {children}
       </body>

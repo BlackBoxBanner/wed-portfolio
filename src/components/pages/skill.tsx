@@ -1,4 +1,3 @@
-import ScrollToView from "@/components/scrollToView";
 import {
   SiCss3,
   SiExpress,
@@ -10,115 +9,79 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+import {Heading2, Paragraph} from "@/components/ui/typography";
 
-const SkillSection = () => {
+// Define the SkillProps type for the Skill component
+type SkillProps = {
+  name: string;
+  Icon: React.ComponentType;
+};
+
+// Skill Component
+const Skill: React.FC<SkillProps> = ({name, Icon}) => {
   return (
-    <section className="p-8 lg:p-16 flex flex-col gap-12" id="skill">
-      <ScrollToView>
-        <h2 className="text-6xl font-bold mb-4">Skills</h2>
-      </ScrollToView>
+    <>
+      <div className="place-self-start">
+        <Paragraph>{name}</Paragraph>
+      </div>
+      <div className="place-self-end">
+        <Icon />
+      </div>
+    </>
+  );
+};
+
+// SkillsGrid Component
+const SkillsGrid: React.FC = () => {
+  const skills: SkillProps[] = [
+    {name: "Next.js", Icon: SiNextdotjs},
+    {name: "ExpressJS", Icon: SiExpress},
+    {name: "TypeScript", Icon: SiTypescript},
+    {name: "JavaScript", Icon: SiJavascript},
+    {name: "MongoDB", Icon: SiMongodb},
+    {name: "Prisma", Icon: SiPrisma},
+    {name: "CSS", Icon: SiCss3},
+    {name: "TailwindCSS", Icon: SiTailwindcss},
+    {name: "Svelte", Icon: SiSvelte},
+  ];
+
+  // Split the skills array into two halves
+  const half = Math.ceil(skills.length / 2);
+  const skills1 = skills.slice(0, half);
+  const skills2 = skills.slice(half);
+
+  // Display 2 columns when its lg: and 1 column else
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[10rem]">
+      <div className="grid grid-cols-2 text-2xl lg:text-4xl gap-8 w-full md:w-[40rem] lg:max-w-[25rem]">
+        {skills1.map((skill) => (
+          <Skill key={skill.name} name={skill.name} Icon={skill.Icon} />
+        ))}
+      </div>
+      <div className="grid grid-cols-2 text-2xl lg:text-4xl gap-8 w-full md:w-[40rem] lg:max-w-[25rem]">
+        {skills2.map((skill) => (
+          <Skill key={skill.name} name={skill.name} Icon={skill.Icon} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// SkillSection Component
+const SkillSection: React.FC = () => {
+  return (
+    <section className="flex flex-col gap-4" id="skill">
+      <Heading2>Skills</Heading2>
+
       <div className="text-2xl lg:text-4xl ">
-        <ScrollToView>
-          <p className="">
-            I am always eager to learn new technologies and improve my skills to
-            deliver high-quality work. Let&apos;s collaborate to bring your
-            projects to life!
-          </p>
-        </ScrollToView>
+        <Paragraph>
+          I am always eager to learn new technologies and improve my skills to
+          deliver high-quality work. Let&apos;s collaborate to bring your
+          projects to life!
+        </Paragraph>
       </div>
       <div className="flex justify-center items-center my-12 w-full">
-        <div className="grid grid-cols-2 text-2xl lg:text-4xl gap-8 w-full md:w-[40rem]">
-          <div className="place-self-start">
-            <ScrollToView>
-              <p>Next.js</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <SiNextdotjs />
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <SiExpress />
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <p>ExpressJS</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <p>TypeScript</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <SiTypescript />
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <SiJavascript />
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <p>JavaScript</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <p>MongoDB</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <SiMongodb />
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <SiPrisma />
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <p>Prisma</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <p>CSS</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <SiCss3 />
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <SiTailwindcss />
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <p>TailwindCSS</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-start">
-            <ScrollToView>
-              <p>Svelte</p>
-            </ScrollToView>
-          </div>
-          <div className="place-self-end">
-            <ScrollToView>
-              <SiSvelte />
-            </ScrollToView>
-          </div>
-        </div>
+        <SkillsGrid />
       </div>
     </section>
   );

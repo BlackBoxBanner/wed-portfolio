@@ -1,6 +1,6 @@
-import ScrollToView from "@/components/scrollToView";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {Heading2, Paragraph} from "@/components/ui/typography";
 
 type ProjectType = {
   title: string;
@@ -78,29 +78,25 @@ const projects: ProjectType[] = [
 
 const ProjectSection = () => {
   return (
-    <section
-      className="min-h-dvh p-8 lg:p-16 flex flex-col gap-12"
-      id="project">
-      <ScrollToView>
-        <h2 className="text-6xl font-bold mb-4">Projects</h2>
-      </ScrollToView>
-      <div className="grid  lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 text-2xl ">
+    <section className="flex flex-col gap-4" id="project">
+      <Heading2>Projects</Heading2>
+      <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-x-16 text-xl divide-y lg:divide-none">
         {!projects.length
           ? "There is no project yet."
           : projects.map((project) => {
               return (
-                <ScrollToView key={`${project.title}`}>
-                  <div className="border border-primary p-4 grid h-full grid-rows-[auto,1fr] gap-4">
-                    <Link href={project.git}>
-                      <Button
-                        variant={"link"}
-                        className="text-2xl font-bold p-0">
-                        {project.title}
-                      </Button>
-                    </Link>
-                    <p>{project.description}</p>
-                  </div>
-                </ScrollToView>
+                <div
+                  className="py-4 grid h-full grid-rows-[auto,1fr] gap-4"
+                  key={`${project.title}`}>
+                  <Link href={project.git}>
+                    <Button variant={"link"} className="text-2xl font-bold p-0">
+                      {project.title}
+                    </Button>
+                  </Link>
+                  <Paragraph className="lg:text-2xl">
+                    {project.description}
+                  </Paragraph>
+                </div>
               );
             })}
       </div>

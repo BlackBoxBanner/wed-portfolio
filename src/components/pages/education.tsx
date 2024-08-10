@@ -1,4 +1,4 @@
-import ScrollToView from "@/components/scrollToView";
+import {Heading2, Paragraph} from "@/components/ui/typography";
 
 type EducationType = {
   institution: string;
@@ -22,26 +22,20 @@ const educations: EducationType[] = [
 
 const EducationSection = () => {
   return (
-    <section
-      className="min-h-dvh p-8 lg:p-16 flex flex-col gap-12"
-      id="education">
-      <ScrollToView>
-        <h2 className="text-6xl font-bold mb-4">Education</h2>
-      </ScrollToView>
-      <div className="grid grid-rows-2 gap-8 text-2xl">
+    <section className="flex flex-col gap-4" id="education">
+      <Heading2>Education</Heading2>
+      <div className="grid grid-cols-1 divide-y">
         {educations.map((education, index) => (
-          <ScrollToView key={index}>
-            <div className="border border-primary p-4 grid">
-              <p className="font-bold">{education.institution}</p>
-              <p>
-                {education.degree}, {education.fieldOfStudy}
-              </p>
-              <p>
-                {education.startYear} -{" "}
-                {education.current ? "Now" : education.endYear}
-              </p>
-            </div>
-          </ScrollToView>
+          <div className="gap-2 grid py-4" key={index}>
+            <Paragraph className="font-bold">{education.institution}</Paragraph>
+            <Paragraph>
+              {education.degree}, {education.fieldOfStudy}
+            </Paragraph>
+            <Paragraph>
+              {education.startYear} -{" "}
+              {education.current ? "Now" : education.endYear}
+            </Paragraph>
+          </div>
         ))}
       </div>
     </section>

@@ -1,4 +1,5 @@
-import ScrollToView from "@/components/scrollToView";
+import {Heading2, Paragraph} from "@/components/ui/typography";
+import {cn} from "@/lib/utils";
 
 type ExperienceType = {
   company: string;
@@ -17,26 +18,28 @@ const experiences: ExperienceType[] = [];
 
 const WorkSection = () => {
   return (
-    <section
-      className="min-h-dvh p-8 lg:p-16 flex flex-col gap-12 text-2xl lg:text-2xl"
-      id="work">
-      <ScrollToView>
-        <h2 className="text-6xl font-bold mb-4">Work Experience</h2>
-      </ScrollToView>
-      <div className="grid  lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-8">
+    <section className="flex flex-col gap-4" id="work">
+      <Heading2>Work Experience</Heading2>
+      <div
+        className={cn(
+          "grid grid-cols-1 lg:grid-cols-2 text-xl divide-y lg:divide-none"
+        )}>
         {!experiences.length
           ? "There is no work experience yet."
           : experiences.map((experience) => {
               return (
-                <ScrollToView
+                <div
+                  className="grid py-4 gap-4"
                   key={`${experience.company} ${experience.city} ${experience.title}`}>
-                  <div className="border border-primary p-4 grid">
-                    <p className="font-bold">{experience.title}</p>
-                    <p>
+                  <Paragraph className="font-bold">
+                    {experience.title}
+                  </Paragraph>
+                  <div className="">
+                    <Paragraph className="lg:text-2xl">
                       {experience.company}, {experience.city},{" "}
                       {experience.country}
-                    </p>
-                    <p>
+                    </Paragraph>
+                    <Paragraph className="lg:text-2xl">
                       {experience.fromMonth} {experience.fromYear} -{" "}
                       {experience.current ? (
                         "Now"
@@ -45,9 +48,9 @@ const WorkSection = () => {
                           {experience.toMonth} {experience.toYear}
                         </>
                       )}
-                    </p>
+                    </Paragraph>
                   </div>
-                </ScrollToView>
+                </div>
               );
             })}
       </div>
