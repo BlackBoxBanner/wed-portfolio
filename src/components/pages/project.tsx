@@ -74,6 +74,46 @@ const projects: ProjectType[] = [
     description:
       "A project from a database systems course, which includes web interface and database schema design.",
   },
+  {
+    title: "mood-journal",
+    git: "https://github.com/BlackBoxBanner/mood-journal",
+    description:
+      "A project focused on creating a journal application for tracking and analyzing mood changes.",
+  },
+  {
+    title: "cook-book",
+    git: "https://github.com/BlackBoxBanner/cook-book",
+    description:
+      "A digital cookbook application for storing and managing recipes.",
+  },
+  {
+    title: "wordleFinder",
+    git: "https://github.com/BlackBoxBanner/wordleFinder",
+    description:
+      "A tool for finding potential solutions or helping with strategies for the popular word game Wordle.",
+  },
+  {
+    title: "question-solving",
+    git: "https://github.com/BlackBoxBanner/question-solving",
+    description:
+      "A repository containing solutions to various coding or algorithmic challenges.",
+  },
+  {
+    title: "BlackJackTerminal",
+    git: "https://github.com/BlackBoxBanner/BlackJackTerminal",
+    description: "A terminal-based implementation of the Blackjack card game.",
+  },
+  {
+    title: "utils",
+    git: "https://github.com/DookDiks/utils",
+    description:
+      "A collection of utility functions or tools to assist with various programming tasks.",
+  },
+  {
+    title: "shortlink",
+    git: "https://github.com/DookDiks/shortlink",
+    description: "A URL shortening service or tool for creating short links.",
+  },
 ];
 
 const ProjectSection = () => {
