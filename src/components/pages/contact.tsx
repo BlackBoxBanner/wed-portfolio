@@ -26,6 +26,7 @@ const ContactMe = () => {
       from: "",
       title: "",
       message: "",
+      to: "svac.mai@gmail.com",
     },
   });
 
@@ -74,20 +75,40 @@ const ContactMe = () => {
           <Heading2>Contact Me</Heading2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="from"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>From</FormLabel>
-                    <FormControl>
-                      <Input placeholder="xxx@xxx.xxx" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="from"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormLabel>From</FormLabel>
+                      <FormControl>
+                        <Input placeholder="xxx@xxx.xxx" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="to"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormLabel>To</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="svac.mai@gmail.com"
+                          disabled
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name="title"
@@ -117,7 +138,9 @@ const ContactMe = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button className="text-xl" size={"lg"} type="submit">
+                Submit
+              </Button>
             </form>
           </Form>
         </div>
