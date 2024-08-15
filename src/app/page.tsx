@@ -9,14 +9,16 @@ import ContactMe from "@/components/pages/contact";
 export default function Home() {
   return (
     <main className="h-dvh relative">
-      <section className="p-8 lg:p-16 grid grid-cols-1 gap-12">
-        <IntroductionSection />
-        <AboutSection />
-        <SkillSection />
-        <EducationSection />
-        <WorkSection />
-        <ProjectSection />
-      </section>
+      <div className="md:max-w-[80rem] md:mx-auto">
+        <section className="p-8 lg:p-16 grid grid-cols-1 gap-12">
+          <IntroductionSection />
+          <AboutSection />
+          <SkillSection />
+          <EducationSection />
+          <WorkSection />
+          <ProjectSection />
+        </section>
+      </div>
       <ContactMe />
     </main>
   );
