@@ -3,7 +3,10 @@ import {ComponentProps} from "react";
 
 export const Heading1 = ({className, ...props}: ComponentProps<"h1">) => {
   return (
-    <h1 className={cn("text-[10vw] leading-[12vw]", className)} {...props} />
+    <h1
+      className={cn("text-[7vw] lg:text-[8vw] leading-tight", className)}
+      {...props}
+    />
   );
 };
 
