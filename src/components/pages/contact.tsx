@@ -26,7 +26,7 @@ const ContactMe = () => {
       from: "",
       title: "",
       message: "",
-      to: "svac.mai@gmail.com",
+      to: "sueksit@redbiiddsun.com",
     },
   });
 
@@ -98,7 +98,7 @@ const ContactMe = () => {
                       <FormLabel>To</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="svac.mai@gmail.com"
+                          placeholder="sueksit@redbiiddsun.com"
                           disabled
                           {...field}
                         />

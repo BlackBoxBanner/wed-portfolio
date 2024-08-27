@@ -16,17 +16,22 @@ export async function POST(request: NextRequest) {
 
     // Configure the nodemailer transport using environment variables
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.MAIL_HOST,
+      port: parseInt(process.env.MAIL_PORT!),
+      secure: true,
       auth: {
-        user: process.env.MY_EMAIL,
-        pass: process.env.MY_PASSWORD,
+        user: process.env.MAIL_EMAIL,
+        pass: process.env.MAIL_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
 
     // Define the mail options
     const mailOptions = {
-      from: process.env.MY_EMAIL,
-      to: process.env.MY_EMAIL,
+      from: process.env.MAIL_EMAIL,
+      to: process.env.MAIL_EMAIL,
       subject: `New message from ${from}: ${title}`,
       text: `
 You have received a new message from your portfolio website.

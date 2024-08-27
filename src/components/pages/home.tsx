@@ -1,4 +1,4 @@
-import {Heading1, Paragraph} from "@/components/ui/typography";
+import { Heading1, Paragraph } from "@/components/ui/typography";
 import Image from "next/image";
 
 const IntroductionSection = () => {
