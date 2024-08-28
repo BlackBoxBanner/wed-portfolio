@@ -1,6 +1,7 @@
 import {SentMailSchema} from "@/lib/formSchema/mail";
 import {NextRequest, NextResponse} from "next/server";
 import nodemailer from "nodemailer";
+import {Options} from "nodemailer/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,14 +15,26 @@ export async function POST(request: NextRequest) {
 
     const {from, title, message} = validationResult.data;
 
-    // Configure the nodemailer transport using environment variables
+    // Check environment variables and handle errors if not provided
+    const mailHost = process.env.MAIL_HOST;
+    const mailPort = process.env.MAIL_PORT
+      ? parseInt(process.env.MAIL_PORT)
+      : 587;
+    const mailUser = process.env.MAIL_EMAIL;
+    const mailPass = process.env.MAIL_PASSWORD;
+
+    if (!mailHost || !mailPort || !mailUser || !mailPass) {
+      throw new Error("Missing email configuration in environment variables");
+    }
+
+    // Configure the nodemailer transport
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: parseInt(process.env.MAIL_PORT!),
-      secure: true,
+      host: mailHost,
+      port: mailPort,
+      secure: mailPort === 465, // true for 465, false for other ports
       auth: {
-        user: process.env.MAIL_EMAIL,
-        pass: process.env.MAIL_PASSWORD,
+        user: mailUser,
+        pass: mailPass,
       },
       tls: {
         rejectUnauthorized: false,
@@ -29,19 +42,25 @@ export async function POST(request: NextRequest) {
     });
 
     // Define the mail options
-    const mailOptions = {
-      from: process.env.MAIL_EMAIL,
-      to: process.env.MAIL_EMAIL,
-      subject: `New message from ${from}: ${title}`,
-      text: `
-You have received a new message from your portfolio website.
-
-Sender: ${from}
-Subject: ${title}
-
-Message:
-${message}
+    const mailOptions: Options = {
+      from: mailUser,
+      to: mailUser,
+      subject: title,
+      html: `
+<div>
+  <div>
+    <strong>From:</strong> ${from}
+  </div>
+  <div>
+    <h2>${title}</h2>
+    <p>${message}</p>
+  </div>
+  <div>
+    This email was sent from your portfolio website.
+  </div>
+</div>
       `,
+      sender: mailUser,
     };
 
     // Send the email and handle the promise
