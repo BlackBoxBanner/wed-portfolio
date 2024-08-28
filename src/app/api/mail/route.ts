@@ -22,8 +22,9 @@ export async function POST(request: NextRequest) {
       : 587;
     const mailUser = process.env.MAIL_EMAIL;
     const mailPass = process.env.MAIL_PASSWORD;
+    const mailTo = process.env.MAIL_TO;
 
-    if (!mailHost || !mailPort || !mailUser || !mailPass) {
+    if (!mailHost || !mailPort || !mailUser || !mailPass || !mailTo) {
       throw new Error("Missing email configuration in environment variables");
     }
 
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
     // Define the mail options
     const mailOptions: Options = {
       from: mailUser,
-      to: mailUser,
+      to: mailTo,
       subject: title,
       html: `
 <!DOCTYPE html>
