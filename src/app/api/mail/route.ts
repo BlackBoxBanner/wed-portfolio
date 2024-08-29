@@ -44,7 +44,11 @@ export async function POST(request: NextRequest) {
 
     // Define the mail options
     const mailOptions: Options = {
-      from: mailUser,
+      from: {
+        address: mailUser,
+        name: "Portfolio Website",
+      },
+
       to: mailTo,
       subject: title,
       html: `
