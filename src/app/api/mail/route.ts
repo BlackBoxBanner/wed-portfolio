@@ -102,6 +102,7 @@ export async function POST(request: NextRequest) {
         color: #555555;
         font-size: 16px;
         line-height: 1.5;
+        padding: 16px;
       }
       .footer {
         margin-top: 20px;
