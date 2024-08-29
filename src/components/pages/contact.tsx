@@ -37,6 +37,7 @@ const ContactMe = () => {
     const submitToast = toast({
       title: "Sending...",
       description: "Please wait a moment while the email is being sent.",
+      duration: 100 * 100,
     });
 
     try {
@@ -53,6 +54,7 @@ const ContactMe = () => {
           ...submitToast,
           title: "Email Sent",
           description: "Your message has been sent successfully.",
+          duration: 1000,
         });
       } else {
         throw new Error("Failed to send email");
@@ -64,6 +66,7 @@ const ContactMe = () => {
         title: "Send Failed",
         description:
           "There was an issue sending your email. Please try again later.",
+        duration: 3000,
       });
     }
   };
