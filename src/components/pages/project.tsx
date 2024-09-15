@@ -6,6 +6,8 @@ type ProjectType = {
   title: string;
   git: string;
   description: string;
+  isOnGoing?: boolean;
+  isPrivate?: boolean;
 };
 
 const projects: ProjectType[] = [
@@ -113,6 +115,12 @@ const projects: ProjectType[] = [
     title: "shortlink",
     git: "https://github.com/DookDiks/shortlink",
     description: "A URL shortening service or tool for creating short links.",
+  },
+  {
+    title: "portfolio",
+    git: "https://github.com/BlackBoxBanner/wed-portfolio",
+    description:
+      "The source code for this portfolio website, built using Next.js and Tailwind CSS.",
   },
 ];
 

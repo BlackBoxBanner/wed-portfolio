@@ -14,7 +14,43 @@ type ExperienceType = {
   description?: string;
 };
 
-const experiences: ExperienceType[] = [];
+const experiences: ExperienceType[] = [
+  {
+    country: "Japan",
+    city: "Fukuoka",
+    company: "Fukuoka Institute of Technology",
+    title: "Data Analyst Intern",
+    current: false,
+    fromMonth: "June",
+    fromYear: 2024,
+    toMonth: "August",
+    toYear: 2024,
+    description:
+      "During my internship at Fukuoka Institute of Technology, I analyzed sales data for an Australian café using Python, helping inform pricing and inventory strategies. I created synthetic data to simulate real-world conditions based on research into POS systems, while developing expertise in Python libraries and adapting quickly to diverse project requirements.",
+  },
+  {
+    country: "Thailand",
+    city: "Bangkok",
+    company: "King Mongkut’s University of Technology Thonburi CPE",
+    title: "Server Administrator",
+    current: true,
+    fromMonth: "August",
+    fromYear: 2024,
+    description:
+      "Being server administrator for Computer Engineering department at KMUTT.",
+  },
+  {
+    country: "Thailand",
+    city: "Bangkok",
+    company: "King Mongkut's University of Technology Thonburi (KMUTT)",
+    title: "Fullstack Developer (Academic Project)",
+    current: true,
+    fromMonth: "August",
+    fromYear: 2024,
+    description:
+      "This project, part of my 4th-year Computer Engineering coursework at KMUTT, was requested by another department within the university. It involved applying my fullstack development skills to meet specific departmental needs, showcasing interdisciplinary collaboration and problem-solving.",
+  },
+];
 
 const WorkSection = () => {
   return (
