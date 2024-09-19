@@ -12,24 +12,6 @@ type ProjectType = {
 
 const projects: ProjectType[] = [
   {
-    title: "intern-emotion-analysis",
-    git: "https://github.com/BlackBoxBanner/intern-emotion-analysis",
-    description:
-      "A project focused on analyzing emotions, possibly related to internship experiences or other data sources.",
-  },
-  {
-    title: "emotion-ai",
-    git: "https://github.com/BlackBoxBanner/emotion-ai",
-    description:
-      "This repository likely deals with artificial intelligence applications in emotion recognition or analysis.",
-  },
-  {
-    title: "emotion-analysis",
-    git: "https://github.com/BlackBoxBanner/emotion-analysis",
-    description:
-      "A project centered on analyzing emotions, potentially through various data and methodologies.",
-  },
-  {
     title: "KMUTT-x-FIT_intern",
     git: "https://github.com/BlackBoxBanner/KMUTT-x-FIT_intern",
     description:
