@@ -4,6 +4,7 @@ import WorkSection from "@/components/pages/work";
 import ProjectSection from "@/components/pages/project";
 import EducationSection from "@/components/pages/education";
 import SkillSection from "@/components/pages/skill";
+import BlogSection from "@/components/pages/blog";
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
           <EducationSection />
         </div>
       </div>
+
+      {/* Blog Section - Full width background */}
+      <BlogSection />
 
 
     </main>

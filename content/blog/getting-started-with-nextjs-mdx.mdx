@@ -1,0 +1,75 @@
+---
+title: "Getting Started with Next.js 14 and MDX"
+description: "Learn how to build a modern blog using Next.js 14 with MDX support for rich content creation."
+date: "2024-12-05"
+author: "Sueksit Vachirakumthorn"
+tags: ["Next.js", "MDX", "React", "Web Development"]
+image: "/blog/nextjs-mdx.jpg"
+---
+
+Welcome to my blog! In this post, I'll walk you through how to set up a modern blog using **Next.js 14** with **MDX** support.
+
+## What is MDX?
+
+MDX is a powerful format that lets you write JSX in your Markdown documents. This means you can:
+
+- Use React components directly in your content
+- Create interactive documentation
+- Build rich, engaging blog posts
+
+## Setting Up Next.js with MDX
+
+First, let's install the necessary dependencies:
+
+```bash
+npm install @next/mdx @mdx-js/loader @mdx-js/react
+npm install remark-gfm rehype-highlight rehype-slug
+```
+
+## Key Features
+
+### 1. Syntax Highlighting
+
+Code blocks automatically get syntax highlighting:
+
+```javascript
+const greeting = (name) => {
+  return `Hello, ${name}!`;
+};
+
+console.log(greeting("World"));
+```
+
+### 2. Interactive Components
+
+You can embed React components directly:
+
+```jsx
+<Button onClick={() => alert('Hello!')}>
+  Click me!
+</Button>
+```
+
+### 3. Rich Typography
+
+MDX supports all standard Markdown features:
+
+- **Bold text**
+- *Italic text*
+- `Inline code`
+- [Links](https://nextjs.org)
+
+> This is a blockquote with some important information.
+
+## Benefits of Using MDX
+
+1. **Component Integration**: Use React components anywhere
+2. **Type Safety**: Full TypeScript support
+3. **Performance**: Static generation with Next.js
+4. **SEO Friendly**: Server-side rendering out of the box
+
+## Conclusion
+
+MDX with Next.js provides a powerful platform for creating content-rich websites. The combination of Markdown's simplicity with React's power makes it perfect for modern blogs and documentation sites.
+
+Happy coding! 🚀
