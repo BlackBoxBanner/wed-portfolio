@@ -3,6 +3,7 @@ import {Outfit as FontSans} from "next/font/google";
 import "./globals.css";
 import {cn} from "@/lib/utils";
 import Menu from "@/components/menu";
+import Footer from "@/components/footer";
 import {Toaster} from "@/components/ui/toaster";
 import { generateMetadata, generateStructuredData } from "@/lib/metadata";
 
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Toaster />
         <Menu />
         {children}
+        <Footer />
       </body>
     </html>
   );
