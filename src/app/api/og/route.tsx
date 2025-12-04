@@ -19,27 +19,65 @@ export async function GET(request: NextRequest) {
             height: '100%',
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: type === 'blog' ? '#0a0a0a' : '#000',
-            backgroundImage: type === 'blog' 
-              ? 'linear-gradient(45deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%)'
-              : 'linear-gradient(45deg, #000 0%, #1a1a1a 100%)',
-            fontSize: 60,
-            fontWeight: 700,
-            padding: 60,
+            position: 'relative',
           }}
         >
+          {/* Background Image */}
+          <img
+            src={`${process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app'}/graduation-bg.jpg`}
+            alt="Background"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
+          
+          {/* Overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              background: type === 'blog' 
+                ? 'linear-gradient(45deg, rgba(10, 10, 10, 0.85) 0%, rgba(26, 26, 26, 0.8) 50%, rgba(42, 42, 42, 0.75) 100%)'
+                : 'linear-gradient(45deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 26, 0.7) 100%)',
+            }}
+          />
+          
+          {/* Content */}
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 60,
+              fontWeight: 700,
+              padding: 60,
+              zIndex: 10,
+            }}
+          >
           {type === 'blog' && (
             <div
               style={{
                 position: 'absolute',
                 top: 40,
                 left: 60,
-                color: '#666',
+                color: '#fff',
                 fontSize: 24,
                 fontWeight: 500,
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
               }}
             >
               📝 Blog Post
@@ -52,9 +90,10 @@ export async function GET(request: NextRequest) {
                 position: 'absolute',
                 top: 40,
                 right: 60,
-                color: '#666',
+                color: '#fff',
                 fontSize: 20,
                 fontWeight: 400,
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
               }}
             >
               {new Date(date).toLocaleDateString('en-US', { 
@@ -67,16 +106,14 @@ export async function GET(request: NextRequest) {
 
           <div
             style={{
-              backgroundImage: 'linear-gradient(90deg, #fff 0%, #e5e5e5 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
+              color: '#fff',
               fontSize: type === 'blog' ? 52 : 72,
               fontWeight: 900,
               marginBottom: 30,
               textAlign: 'center',
               lineHeight: 1.1,
               maxWidth: '90%',
+              textShadow: '3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5)',
             }}
           >
             {title}
@@ -84,13 +121,14 @@ export async function GET(request: NextRequest) {
           
           <div
             style={{
-              color: '#a0a0a0',
+              color: '#e0e0e0',
               fontSize: type === 'blog' ? 28 : 36,
               fontWeight: 400,
               textAlign: 'center',
               maxWidth: '85%',
               lineHeight: 1.2,
               marginBottom: tags.length > 0 ? 30 : 0,
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
             }}
           >
             {subtitle}
@@ -110,12 +148,14 @@ export async function GET(request: NextRequest) {
                 <div
                   key={index}
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    color: '#ccc',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    color: '#fff',
                     padding: '8px 16px',
                     borderRadius: 20,
                     fontSize: 18,
                     fontWeight: 500,
+                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
                   }}
                 >
                   #{tag.trim()}
@@ -128,12 +168,14 @@ export async function GET(request: NextRequest) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              color: '#666',
+              color: '#fff',
               fontSize: type === 'blog' ? 20 : 24,
               marginTop: 'auto',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
             }}
           >
             {type === 'blog' ? '🚀 sueksit.vercel.app' : '🚀 Building digital experiences that matter'}
+          </div>
           </div>
         </div>
       ),
