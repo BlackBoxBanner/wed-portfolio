@@ -12,8 +12,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "My Web Portfolio",
-  description: "This is my website portfolio, built using Next.js.",
+  title: "Sueksit Vachirakumthorn | Full-Stack Developer",
+  description: "Full-Stack Developer passionate about building web and mobile applications that solve real-world problems. Specializing in React, Next.js, React Native, and modern web technologies.",
 };
 export default function RootLayout({
   children,

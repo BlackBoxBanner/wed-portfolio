@@ -5,62 +5,73 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiPrisma,
-  SiSvelte,
+  SiReact,
   SiTailwindcss,
   SiTypescript,
+  SiNodedotjs,
+  SiHtml5,
+  SiExpo,
+  SiGit,
+  SiGithub,
+  SiPostgresql,
+  SiDocker,
+  SiSvelte,
+  SiVuedotjs,
+  SiAmazonaws,
+  SiCloudflare,
 } from "react-icons/si";
 import {Heading2, Paragraph} from "@/components/ui/typography";
 
 // Define the SkillProps type for the Skill component
 type SkillProps = {
   name: string;
-  Icon: React.ComponentType;
+  Icon: React.ComponentType<{className?: string}>;
+  proficiency: "Beginner" | "Intermediate" | "Advanced";
+};
+
+type SkillCategoryProps = {
+  title: string;
+  skills: SkillProps[];
+  description: string;
 };
 
 // Skill Component
-const Skill: React.FC<SkillProps> = ({name, Icon}) => {
+const Skill: React.FC<SkillProps> = ({name, Icon, proficiency}) => {
+  const getProficiencyColor = (level: string) => {
+    switch (level) {
+      case "Advanced": return "text-green-600";
+      case "Intermediate": return "text-yellow-600";
+      case "Beginner": return "text-blue-600";
+      default: return "text-gray-600";
+    }
+  };
+
   return (
-    <>
-      <div className="place-self-start">
-        <Paragraph>{name}</Paragraph>
+    <div className="group bg-card border rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:scale-105">
+      <div className="flex items-center gap-3 mb-2">
+        <Icon className="text-3xl text-primary group-hover:text-primary/80 transition-colors" />
+        <div className="flex-1">
+          <h4 className="font-semibold text-lg">{name}</h4>
+          <p className={`text-sm font-medium ${getProficiencyColor(proficiency)}`}>
+            {proficiency}
+          </p>
+        </div>
       </div>
-      <div className="place-self-end">
-        <Icon />
-      </div>
-    </>
+    </div>
   );
 };
 
-// SkillsGrid Component
-const SkillsGrid: React.FC = () => {
-  const skills: SkillProps[] = [
-    {name: "Next.js", Icon: SiNextdotjs},
-    {name: "ExpressJS", Icon: SiExpress},
-    {name: "TypeScript", Icon: SiTypescript},
-    {name: "JavaScript", Icon: SiJavascript},
-    {name: "MongoDB", Icon: SiMongodb},
-    {name: "Prisma", Icon: SiPrisma},
-    {name: "CSS", Icon: SiCss3},
-    {name: "TailwindCSS", Icon: SiTailwindcss},
-    {name: "Svelte", Icon: SiSvelte},
-  ];
-
-  // Split the skills array into two halves
-  const half = Math.ceil(skills.length / 2);
-  const skills1 = skills.slice(0, half);
-  const skills2 = skills.slice(half);
-
-  // Display 2 columns when its lg: and 1 column else
+// SkillCategory Component
+const SkillCategory: React.FC<SkillCategoryProps> = ({title, skills, description}) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[10rem]">
-      <div className="grid grid-cols-2 text-2xl lg:text-4xl gap-8 w-full md:w-[40rem] lg:max-w-[25rem]">
-        {skills1.map((skill) => (
-          <Skill key={skill.name} name={skill.name} Icon={skill.Icon} />
-        ))}
+    <div className="space-y-4">
+      <div className="text-center md:text-left">
+        <h3 className="text-2xl font-bold text-primary mb-2">{title}</h3>
+        <Paragraph className="text-muted-foreground">{description}</Paragraph>
       </div>
-      <div className="grid grid-cols-2 text-2xl lg:text-4xl gap-8 w-full md:w-[40rem] lg:max-w-[25rem]">
-        {skills2.map((skill) => (
-          <Skill key={skill.name} name={skill.name} Icon={skill.Icon} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {skills.map((skill) => (
+          <Skill key={skill.name} {...skill} />
         ))}
       </div>
     </div>
@@ -69,19 +80,87 @@ const SkillsGrid: React.FC = () => {
 
 // SkillSection Component
 const SkillSection: React.FC = () => {
-  return (
-    <section className="flex flex-col gap-4" id="skill">
-      <Heading2>Skills</Heading2>
+  const frontendSkills: SkillProps[] = [
+    {name: "React", Icon: SiReact, proficiency: "Advanced"},
+    {name: "Next.js", Icon: SiNextdotjs, proficiency: "Advanced"},
+    {name: "TypeScript", Icon: SiTypescript, proficiency: "Advanced"},
+    {name: "JavaScript", Icon: SiJavascript, proficiency: "Advanced"},
+    {name: "TailwindCSS", Icon: SiTailwindcss, proficiency: "Advanced"},
+    {name: "HTML5", Icon: SiHtml5, proficiency: "Advanced"},
+    {name: "CSS3", Icon: SiCss3, proficiency: "Advanced"},
+    {name: "SvelteKit", Icon: SiSvelte, proficiency: "Intermediate"},
+    {name: "Vue.js", Icon: SiVuedotjs, proficiency: "Beginner"},
+  ];
 
-      <div className="text-2xl lg:text-4xl ">
-        <Paragraph>
-          I am always eager to learn new technologies and improve my skills to
-          deliver high-quality work. Let&apos;s collaborate to bring your
-          projects to life!
+  const backendSkills: SkillProps[] = [
+    {name: "Node.js", Icon: SiNodedotjs, proficiency: "Intermediate"},
+    {name: "Express.js", Icon: SiExpress, proficiency: "Intermediate"},
+    {name: "Elysia.js", Icon: SiNodedotjs, proficiency: "Intermediate"},
+    {name: "MongoDB", Icon: SiMongodb, proficiency: "Intermediate"},
+    {name: "PostgreSQL", Icon: SiPostgresql, proficiency: "Intermediate"},
+    {name: "Prisma", Icon: SiPrisma, proficiency: "Intermediate"},
+  ];
+
+  const mobileSkills: SkillProps[] = [
+    {name: "React Native", Icon: SiReact, proficiency: "Intermediate"},
+    {name: "Expo", Icon: SiExpo, proficiency: "Intermediate"},
+  ];
+
+  const toolsSkills: SkillProps[] = [
+    {name: "Git", Icon: SiGit, proficiency: "Advanced"},
+    {name: "GitHub", Icon: SiGithub, proficiency: "Advanced"},
+    {name: "Docker", Icon: SiDocker, proficiency: "Beginner"},
+    {name: "AWS", Icon: SiAmazonaws, proficiency: "Beginner"},
+    {name: "Cloudflare", Icon: SiCloudflare, proficiency: "Beginner"},
+  ];
+
+  return (
+    <section className="space-y-12" id="skill">
+      <div className="text-center">
+        <Heading2 className="text-4xl md:text-5xl font-bold mb-4">Skills & Technologies</Heading2>
+        <Paragraph className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          I&apos;m always eager to learn new technologies and improve my skills to deliver high-quality work. 
+          Here&apos;s my current tech stack and expertise level in each area.
         </Paragraph>
       </div>
-      <div className="flex justify-center items-center my-12 w-full">
-        <SkillsGrid />
+
+      <div className="space-y-12">
+        <SkillCategory 
+          title="Frontend Development"
+          description="Building modern, responsive, and interactive user interfaces"
+          skills={frontendSkills}
+        />
+        
+        <SkillCategory 
+          title="Backend Development" 
+          description="Creating robust server-side applications and APIs"
+          skills={backendSkills}
+        />
+        
+        <SkillCategory 
+          title="Mobile Development"
+          description="Cross-platform mobile applications with native performance"
+          skills={mobileSkills}
+        />
+        
+        <SkillCategory 
+          title="Tools & DevOps"
+          description="Development tools and deployment workflows"
+          skills={toolsSkills}
+        />
+      </div>
+
+      <div className="bg-muted/50 rounded-lg p-8 text-center">
+        <h3 className="text-2xl font-bold mb-4">What I&apos;m Currently Learning</h3>
+        <Paragraph className="text-lg mb-4">
+          I believe in continuous learning and staying up-to-date with the latest technologies.
+        </Paragraph>
+        <div className="flex flex-wrap justify-center gap-4 text-sm">
+          <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">CI/CD Pipelines</span>
+          <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">Microservices</span>
+          <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">Cloud Infrastructure</span>
+          <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">Advanced React Patterns</span>
+        </div>
       </div>
     </section>
   );
