@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "preview": "next build && next start",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",

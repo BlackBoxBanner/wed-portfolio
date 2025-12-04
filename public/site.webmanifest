@@ -1,0 +1,17 @@
+{
+  "name": "Sueksit Vachirakumthorn - Full-Stack Developer",
+  "short_name": "Sueksit Portfolio",
+  "description": "Full-Stack Developer passionate about building web and mobile applications",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

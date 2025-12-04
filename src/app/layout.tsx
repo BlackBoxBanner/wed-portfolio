@@ -4,6 +4,7 @@ import "./globals.css";
 import {cn} from "@/lib/utils";
 import Menu from "@/components/menu";
 import {Toaster} from "@/components/ui/toaster";
+import { generateMetadata, generateStructuredData } from "@/lib/metadata";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -11,17 +12,24 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-  title: "Sueksit Vachirakumthorn | Full-Stack Developer",
-  description: "Full-Stack Developer passionate about building web and mobile applications that solve real-world problems. Specializing in React, Next.js, React Native, and modern web technologies.",
-};
+export const metadata: Metadata = generateMetadata();
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = generateStructuredData();
+  
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased text-lg",
