@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Blog | Sueksit Vachirakumthorn',
     description: 'Thoughts, tutorials, and insights about web development and technology.',
     creator: '@sueksitv', // Replace with your Twitter handle
