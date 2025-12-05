@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <footer className="bg-background border-t border-border mt-24">
       <div className="max-w-7xl mx-auto px-8 lg:px-16 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           {/* Contact Section */}
           <div className="text-center md:text-left">
             <h3 className="font-semibold text-foreground mb-2">Let&apos;s Connect</h3>
@@ -66,20 +66,22 @@ export default function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center gap-4">
             {socialLinks}
           </div>
 
           {/* Back to Top */}
-          <Button
-            variant="ghost"
-            onClick={scrollToTop}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp className="h-4 w-4 mr-2" aria-hidden="true" />
-            Back to Top
-          </Button>
+          <div className="flex justify-center md:justify-end">
+            <Button
+              variant="ghost"
+              onClick={scrollToTop}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="h-4 w-4 mr-2" aria-hidden="true" />
+              Back to Top
+            </Button>
+          </div>
         </div>
 
         {/* Copyright */}
