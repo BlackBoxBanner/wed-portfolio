@@ -10,6 +10,7 @@ export interface BlogPost {
   author?: string;
   tags?: string[];
   image?: string;
+  ogImage?: string;
   content: string;
 }
 
@@ -33,6 +34,7 @@ export function getAllBlogPosts(): BlogPost[] {
           author: data.author,
           tags: data.tags || [],
           image: data.image,
+          ogImage: data.ogImage,
           content,
         } as BlogPost;
       })
@@ -59,6 +61,7 @@ export function getBlogPost(slug: string): BlogPost | null {
       author: data.author,
       tags: data.tags || [],
       image: data.image,
+      ogImage: data.ogImage,
       content,
     };
   } catch (error) {

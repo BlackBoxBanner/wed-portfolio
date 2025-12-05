@@ -33,15 +33,6 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
-  
-  // Generate dynamic OG image URL
-  const ogImageUrl = `${baseUrl}/api/og?${new URLSearchParams({
-    title: post.title,
-    subtitle: post.description,
-    type: 'blog',
-    date: post.date,
-    tags: post.tags?.join(',') || ''
-  }).toString()}`;
 
   return {
     title: `${post.title} | Sueksit Vachirakumthorn`,
@@ -52,18 +43,11 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     publisher: 'Sueksit Vachirakumthorn',
     
     openGraph: {
+      card: 'summary_large_image',
       title: post.title,
       description: post.description,
       url: postUrl,
       siteName: 'Sueksit Vachirakumthorn - Web Developer',
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
       locale: 'en_US',
       type: 'article',
       publishedTime: post.date,
@@ -75,8 +59,6 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [ogImageUrl],
-      creator: '@sueksitv', // Replace with your Twitter handle
     },
     
     alternates: {
@@ -106,15 +88,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
-  
-  // Generate dynamic OG image URL  
-  const ogImageUrl = `${baseUrl}/api/og?${new URLSearchParams({
-    title: post.title,
-    subtitle: post.description,
-    type: 'blog',
-    date: post.date,
-    tags: post.tags?.join(',') || ''
-  }).toString()}`;
 
   // Structured data for SEO
   const structuredData = {
@@ -122,7 +95,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.description,
-    "image": ogImageUrl,
     "author": {
       "@type": "Person",
       "name": post.author || "Sueksit Vachirakumthorn",
