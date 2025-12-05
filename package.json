@@ -11,6 +11,8 @@
     "type-check": "tsc --noEmit",
     "preview": "next build && next start",
     "analyze": "ANALYZE=true next build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "husky"
   },
   "dependencies": {
@@ -60,6 +62,12 @@
     "zod": "^3.23.8"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md,mdx,html,svg}": [
+      "prettier --write"
+    ]
   }
 }
