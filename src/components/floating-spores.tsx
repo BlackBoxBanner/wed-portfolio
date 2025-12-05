@@ -36,7 +36,7 @@ export default function FloatingSpores() {
       const newSpores: Spore[] = [];
       
       // Large ambient orbs (foreground)
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 4; i++) {
         newSpores.push({
           id: i,
           x: Math.random() * 100,
@@ -46,20 +46,6 @@ export default function FloatingSpores() {
           duration: Math.random() * 25 + 20, // Slower, more ambient movement (20-45s)
           delay: Math.random() * 15,
           layer: 'foreground',
-        });
-      }
-      
-      // Smaller background spores for texture
-      for (let i = 8; i < 14; i++) {
-        newSpores.push({
-          id: i,
-          x: Math.random() * 100,
-          y: Math.random() * 100,
-          size: Math.random() * 20 + 10, // Smaller sizes (10-30px)
-          color: colors[Math.floor(Math.random() * colors.length)],
-          duration: Math.random() * 30 + 25, // Even slower movement (25-55s)
-          delay: Math.random() * 20,
-          layer: 'background',
         });
       }
       
