@@ -33,17 +33,17 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
+  const ogImageUrl = post.ogImage ? `${baseUrl}${post.ogImage}` : `${baseUrl}/blog/${post.slug}/opengraph-image`;
 
   return {
     title: `${post.title} | Sueksit Vachirakumthorn`,
     description: post.description,
     keywords: post.tags?.join(', '),
-    authors: [{ name: post.author || 'Sueksit Vachirakumthorn' }],
+    authors: [{ name: post.author || 'Sueksit Vachirakumthorn', url: baseUrl }],
     creator: post.author || 'Sueksit Vachirakumthorn',
     publisher: 'Sueksit Vachirakumthorn',
     
     openGraph: {
-      card: 'summary_large_image',
       title: post.title,
       description: post.description,
       url: postUrl,
@@ -53,12 +53,21 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       publishedTime: post.date,
       authors: [post.author || 'Sueksit Vachirakumthorn'],
       tags: post.tags,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
+      images: [ogImageUrl],
     },
     
     alternates: {
@@ -76,6 +85,24 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
         'max-snippet': -1,
       },
     },
+    
+    // Additional SEO metadata
+    applicationName: 'Sueksit Vachirakumthorn Portfolio',
+    referrer: 'origin-when-cross-origin',
+    colorScheme: 'light dark',
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+    },
+    verification: {
+      // Add your verification codes here if you have them
+      // google: 'your-google-verification-code',
+      // yandex: 'your-yandex-verification-code',
+      // yahoo: 'your-yahoo-verification-code',
+    },
+    category: 'Technology',
+    classification: 'Blog Post',
   };
 }
 
@@ -88,6 +115,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
+  const ogImageUrl = post.ogImage ? `${baseUrl}${post.ogImage}` : `${baseUrl}/blog/${post.slug}/opengraph-image`;
 
   // Structured data for SEO
   const structuredData = {
@@ -98,12 +126,22 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     "author": {
       "@type": "Person",
       "name": post.author || "Sueksit Vachirakumthorn",
-      "url": baseUrl
+      "url": baseUrl,
+      "jobTitle": "Full-Stack Developer",
+      "worksFor": {
+        "@type": "Organization", 
+        "name": "Freelance"
+      },
+      "sameAs": [
+        "https://linkedin.com/in/sueksit",
+        "https://github.com/BlackBoxBanner"
+      ]
     },
     "publisher": {
       "@type": "Person",
       "name": "Sueksit Vachirakumthorn",
-      "url": baseUrl
+      "url": baseUrl,
+      "jobTitle": "Full-Stack Developer"
     },
     "datePublished": post.date,
     "dateModified": post.date,
@@ -112,9 +150,17 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       "@id": postUrl
     },
     "url": postUrl,
+    "image": {
+      "@type": "ImageObject",
+      "url": ogImageUrl,
+      "width": 1200,
+      "height": 630
+    },
     "keywords": post.tags?.join(', '),
     "articleSection": "Technology",
-    "inLanguage": "en-US"
+    "inLanguage": "en-US",
+    "wordCount": post.content.split(' ').length,
+    "genre": ["Technology", "Web Development", "Programming"],
   };
 
   return (

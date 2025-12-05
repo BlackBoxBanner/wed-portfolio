@@ -7,6 +7,9 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_APP_URL || "https://sueksit.vercel.app/",
   ogImage: "/og-image.jpg",
   keywords: [
+    "Sueksit Vachirakumthorn",
+    "Sueksit",
+    "Vachirakumthorn", 
     "Full-Stack Developer",
     "React Developer",
     "Next.js Developer", 
@@ -18,8 +21,20 @@ export const siteConfig = {
     "Frontend Developer",
     "Backend Developer",
     "Software Engineer",
+    "Thai Developer",
     "Portfolio",
-    "Sueksit Vachirakumthorn"
+    "Sueksit Vachirakumthorn Portfolio",
+    "Web Development Portfolio",
+    "Software Developer Portfolio",
+    "Thailand Developer",
+    "Bangkok Developer",
+    "Freelance Developer",
+    "Remote Developer",
+    "Tech Professional",
+    "Programmer",
+    "Software Development",
+    "Web Design",
+    "UI/UX Developer"
   ],
   author: {
     name: "Sueksit Vachirakumthorn",
@@ -123,14 +138,32 @@ export function generateStructuredData() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: siteConfig.author.name,
+    alternateName: ['Sueksit', 'Vachirakumthorn'],
     url: siteConfig.url,
     image: `${siteConfig.url}/avatar.jpg`,
     description: siteConfig.description,
     jobTitle: 'Full-Stack Developer',
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: 'Software Developer',
+      occupationLocation: {
+        '@type': 'Country',
+        name: 'Thailand'
+      }
+    },
     worksFor: {
       '@type': 'Organization',
       name: 'Freelance'
     },
+    nationality: {
+      '@type': 'Country',
+      name: 'Thailand'
+    },
+    homeLocation: {
+      '@type': 'Place',
+      name: 'Thailand'
+    },
+    email: siteConfig.author.email,
     sameAs: [
       `https://linkedin.com/in/${siteConfig.author.linkedin}`,
       `https://github.com/${siteConfig.author.github}`,
@@ -144,8 +177,20 @@ export function generateStructuredData() {
       'Node.js',
       'Full-Stack Development',
       'Mobile App Development',
-      'Web Development'
+      'Web Development',
+      'Frontend Development',
+      'Backend Development',
+      'Software Engineering',
+      'UI/UX Development',
+      'Database Management',
+      'API Development'
     ],
+    subjectOf: {
+      '@type': 'WebSite',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+      description: siteConfig.description
+    },
     '@id': siteConfig.url,
     mainEntityOfPage: {
       '@type': 'WebPage',
