@@ -6,6 +6,7 @@ import Menu from "@/components/menu";
 import Footer from "@/components/footer";
 import {Toaster} from "@/components/ui/toaster";
 import { generateMetadata, generateStructuredData } from "@/lib/metadata";
+import FloatingSpores from "@/components/floating-spores";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,9 +34,10 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased text-lg",
+          "min-h-screen bg-background font-sans antialiased text-lg relative",
           fontSans.variable
         )}>
+        <FloatingSpores />
         <Toaster />
         <Menu />
         {children}

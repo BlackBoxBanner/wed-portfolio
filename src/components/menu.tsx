@@ -144,8 +144,8 @@ const Menu = () => {
 
       {/* Optional: Add a subtle scroll indicator */}
       <div className="fixed top-6 left-6 z-50">
-        <div className="bg-card border rounded-full px-3 py-2 shadow-lg">
-          <span className="text-xs font-medium text-muted-foreground">
+        <div className="bg-card border rounded-full px-3 shadow-lg">
+          <span className="text-xs font-medium text-muted-foreground leading-none">
             Sueksit V.
           </span>
         </div>
