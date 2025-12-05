@@ -2,6 +2,7 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {Heading2, Paragraph} from "@/components/ui/typography";
 import { ExternalLink, Github, Star } from "lucide-react";
+import { LuDot } from "react-icons/lu";
 
 type ProjectType = {
   title: string;
@@ -138,8 +139,8 @@ const ProjectCard: React.FC<{project: ProjectType, featured?: boolean}> = ({proj
             <h4 className="font-semibold text-sm mb-2">Key Highlights:</h4>
             <ul className="grid grid-cols-2 gap-1 text-sm text-muted-foreground">
               {project.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                <li key={index} className="flex items-center gap-1">
+                  <LuDot className="w-4 h-4 text-primary flex-shrink-0" />
                   {highlight}
                 </li>
               ))}

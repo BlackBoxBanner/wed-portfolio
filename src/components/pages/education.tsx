@@ -1,5 +1,6 @@
 import {Heading2, Paragraph} from "@/components/ui/typography";
 import { GraduationCap, Calendar, Award } from "lucide-react";
+import { LuDot } from "react-icons/lu";
 
 type EducationType = {
   institution: string;
@@ -79,7 +80,7 @@ const EducationCard: React.FC<{education: EducationType}> = ({education}) => {
             <ul className="space-y-2">
               {education.achievements.map((achievement, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <LuDot className="w-4 h-4 text-primary flex-shrink-0" />
                   <span className="text-muted-foreground">{achievement}</span>
                 </li>
               ))}

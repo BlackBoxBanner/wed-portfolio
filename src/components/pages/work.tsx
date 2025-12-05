@@ -1,6 +1,6 @@
 import { Heading2, Paragraph } from "@/components/ui/typography";
-import { cn } from "@/lib/utils";
 import { MapPin, Calendar, Building } from "lucide-react";
+import { LuDot } from "react-icons/lu";
 
 type ExperienceType = {
   company: string;
@@ -202,7 +202,7 @@ const ExperienceCard: React.FC<{ experience: ExperienceType }> = ({
           </div>
         </div>
 
-        <Paragraph className="leading-relaxed">
+        <Paragraph className="leading-relaxed text-lg">
           {experience.description}
         </Paragraph>
 
@@ -211,7 +211,7 @@ const ExperienceCard: React.FC<{ experience: ExperienceType }> = ({
           <ul className="space-y-2">
             {experience.achievements.map((achievement, index) => (
               <li key={index} className="flex items-start gap-2 text-sm">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                <LuDot className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-muted-foreground">{achievement}</span>
               </li>
             ))}
