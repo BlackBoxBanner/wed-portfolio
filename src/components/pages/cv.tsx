@@ -19,7 +19,7 @@ const CVPage = () => {
   const currentAge = differenceInYears(new Date(), birthDate);
   const [isEditingSummary, setIsEditingSummary] = useState(false);
   const [professionalSummary, setProfessionalSummary] = useState(
-    `${personalInfo.summary} I am currently completing my Bachelor of Engineering in Computer Engineering at King Mongkut's University of Technology Thonburi (KMUTT), where I have gained comprehensive knowledge in software engineering principles, system design, and modern development practices. My academic journey has been complemented by practical experience through internships, academic projects, and professional contract work, allowing me to bridge theoretical knowledge with real-world application development.`,
+    `${personalInfo.summary} Passionate software engineer with hands-on experience in web and mobile development, seeking to leverage strong technical and problem-solving skills in a dynamic team.`,
   );
 
   const formatDateRange = (
@@ -62,18 +62,22 @@ const CVPage = () => {
       {/* CV Content - Black and White, No Styles */}
       <div className='max-w-4xl mx-auto bg-white font-serif text-black leading-normal print-resume px-4'>
         {/* Header */}
-        <header className='text-center mb-6 border-b-2 border-black pb-3'>
-          <h1 className='text-2xl font-bold mb-2 uppercase tracking-wide'>
-            {personalInfo.name}
-          </h1>
-          <h2 className='text-lg mb-3'>CURRICULUM VITAE</h2>
-          <div className='text-xs space-y-1'>
-            <p>{personalInfo.email}</p>
-            <p>{personalInfo.phone}</p>
-            <p>{personalInfo.location}</p>
-            <p>{personalInfo.website}</p>
-            <p>{personalInfo.github}</p>
-            <p>{personalInfo.linkedin}</p>
+        <header className='flex flex-col md:flex-row justify-between items-start mb-4 border-b border-black pb-2 print:flex print:flex-row print:justify-center print:items-start print:mb-2 print:pb-1 print-break-inside-avoid'>
+          <div className='flex-1 flex flex-col items-start print:items-start print:mb-0'>
+            <h1 className='text-xl md:text-2xl font-bold uppercase tracking-wide leading-tight mb-0.5 text-black font-serif print:text-base print:mb-0'>
+              {personalInfo.name}
+            </h1>
+            <h2 className='text-sm md:text-base font-semibold mb-0.5 text-black font-serif print:text-xs print:mb-0'>
+              CURRICULUM VITAE
+            </h2>
+          </div>
+          <div className='flex-1 text-xs flex flex-col items-end md:items-end gap-0.5 text-black font-serif print:items-end print:text-xs print:gap-0 print:mb-0'>
+            <span className='print:mb-0'>{personalInfo.email}</span>
+            <span className='print:mb-0'>{personalInfo.phone}</span>
+            <span className='print:mb-0'>{personalInfo.location}</span>
+            <span className='print:mb-0'>{personalInfo.website}</span>
+            <span className='print:mb-0'>{personalInfo.github}</span>
+            <span className='print:mb-0'>{personalInfo.linkedin}</span>
           </div>
         </header>
 
@@ -126,11 +130,11 @@ const CVPage = () => {
             <Textarea
               value={professionalSummary}
               onChange={(e) => setProfessionalSummary(e.target.value)}
-              className='min-h-[120px] text-sm leading-relaxed font-serif border-black print:hidden'
+              className='min-h-[80px] text-sm leading-relaxed font-serif border-black print:hidden'
               placeholder='Enter your professional summary...'
             />
           ) : (
-            <p className='text-justify leading-relaxed text-sm'>
+            <p className='text-justify leading-relaxed text-xs'>
               {professionalSummary}
             </p>
           )}
@@ -141,40 +145,16 @@ const CVPage = () => {
           <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
             EDUCATION
           </h2>
-          {educations.map((edu, index) => (
-            <div key={index} className='mb-4 print-break-inside-avoid'>
-              <div className='mb-2'>
-                <h3 className='text-base font-bold'>
-                  {edu.degree} in {edu.fieldOfStudy}
-                </h3>
-                <p className='font-semibold text-sm'>{edu.institution}</p>
-                <p className='text-xs'>
-                  {formatEducationDate(edu.startYear, edu.endYear)}
-                  {edu.gpa && ` | GPA: ${edu.gpa}/4.0`}
-                </p>
-              </div>
-
-              {edu.achievements && (
-                <div className='mb-2'>
-                  <h4 className='font-bold mb-1 text-sm'>
-                    Academic Achievements & Activities:
-                  </h4>
-                  <ul className='list-disc ml-6 space-y-0.5 text-xs'>
-                    {edu.achievements.map((achievement, achIndex) => (
-                      <li key={achIndex}>{achievement}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {edu.relevant_courses && (
-                <div className='mb-2'>
-                  <h4 className='font-bold mb-1 text-sm'>
-                    Relevant Coursework:
-                  </h4>
-                  <p className='text-xs'>{edu.relevant_courses.join(', ')}</p>
-                </div>
-              )}
+          {educations.slice(0, 1).map((edu, index) => (
+            <div key={index} className='mb-3 print-break-inside-avoid'>
+              <h3 className='text-base font-bold'>
+                {edu.degree} in {edu.fieldOfStudy}
+              </h3>
+              <p className='font-semibold text-sm'>{edu.institution}</p>
+              <p className='text-xs'>
+                {formatEducationDate(edu.startYear, edu.endYear)}
+                {edu.gpa && ` | GPA: ${edu.gpa}/4.0`}
+              </p>
             </div>
           ))}
         </section>
@@ -184,48 +164,27 @@ const CVPage = () => {
           <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
             PROFESSIONAL EXPERIENCE
           </h2>
-          {experiences.map((exp, index) => (
-            <div key={index} className='mb-4 print-break-inside-avoid'>
-              <div className='mb-2'>
-                <h3 className='text-base font-bold'>{exp.title}</h3>
-                <p className='font-semibold text-sm'>{exp.company}</p>
-                <p className='text-xs'>
-                  {exp.city}, {exp.country} |{' '}
-                  {formatDateRange(
-                    exp.fromMonth,
-                    exp.fromYear,
-                    exp.toMonth,
-                    exp.toYear,
-                    exp.current,
-                  )}{' '}
-                  | {exp.type}
-                </p>
-              </div>
-
-              <div className='mb-2'>
-                <h4 className='font-bold mb-1 text-sm'>Role Description:</h4>
-                <p className='text-justify leading-relaxed text-xs'>
-                  {exp.description}
-                </p>
-              </div>
-
-              <div className='mb-2'>
-                <h4 className='font-bold mb-1 text-sm'>
-                  Key Achievements & Responsibilities:
-                </h4>
-                <ul className='list-disc ml-6 space-y-0.5 text-xs'>
-                  {exp.achievements.map((achievement, achIndex) => (
-                    <li key={achIndex}>{achievement}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className='mb-2'>
-                <h4 className='font-bold mb-1 text-sm'>
-                  Technologies & Tools Used:
-                </h4>
-                <p className='text-xs'>{exp.skills.join(', ')}</p>
-              </div>
+          {experiences.slice(0, 2).map((exp, index) => (
+            <div key={index} className='mb-3 print-break-inside-avoid'>
+              <h3 className='text-base font-bold'>{exp.title}</h3>
+              <p className='font-semibold text-sm'>{exp.company}</p>
+              <p className='text-xs'>
+                {exp.city}, {exp.country} |{' '}
+                {formatDateRange(
+                  exp.fromMonth,
+                  exp.fromYear,
+                  exp.toMonth,
+                  exp.toYear,
+                  exp.current,
+                )}{' '}
+                | {exp.type}
+              </p>
+              <ul className='list-disc ml-6 space-y-0.5 text-xs'>
+                <li>{exp.description}</li>
+                {exp.achievements.slice(0, 2).map((achievement, achIndex) => (
+                  <li key={achIndex}>{achievement}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </section>
@@ -235,28 +194,20 @@ const CVPage = () => {
           <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
             NOTABLE PROJECTS
           </h2>
-          {projects.map((project, index) => (
-            <div key={index} className='mb-4 print-break-inside-avoid'>
+          {projects.slice(0, 3).map((project, index) => (
+            <div key={index} className='mb-3 print-break-inside-avoid'>
               <h3 className='text-base font-bold mb-1'>{project.title}</h3>
               <p className='text-justify leading-relaxed mb-2 text-xs'>
                 {project.description}
               </p>
-
-              <div className='mb-2'>
-                <h4 className='font-bold mb-1 text-sm'>
-                  Key Features & Highlights:
-                </h4>
-                <ul className='list-disc ml-6 space-y-0.5 text-xs'>
-                  {project.highlights.map((highlight, hIndex) => (
-                    <li key={hIndex}>{highlight}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className='mb-2'>
-                <h4 className='font-bold mb-1 text-sm'>Technologies:</h4>
-                <p className='text-xs'>{project.technologies.join(', ')}</p>
-              </div>
+              <ul className='list-disc ml-6 space-y-0.5 text-xs'>
+                {project.highlights.slice(0, 2).map((highlight, hIndex) => (
+                  <li key={hIndex}>{highlight}</li>
+                ))}
+              </ul>
+              <p className='text-xs'>
+                Tech: {project.technologies.slice(0, 3).join(', ')}
+              </p>
             </div>
           ))}
         </section>
@@ -267,72 +218,17 @@ const CVPage = () => {
             TECHNICAL COMPETENCIES
           </h2>
           {skillCategories.map((category, index) => (
-            <div key={index} className='mb-3'>
+            <div key={index} className='mb-2'>
               <h3 className='font-bold mb-1 text-sm'>{category.title}:</h3>
               <p className='leading-relaxed text-xs'>
-                {category.skills.join(', ')}
+                {category.skills.slice(0, 6).join(', ')}
               </p>
             </div>
           ))}
         </section>
 
         {/* Additional Sections for CV */}
-        <section className='mb-6 print-break-inside-avoid'>
-          <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
-            PROFESSIONAL DEVELOPMENT
-          </h2>
-          <div className='mb-3'>
-            <h3 className='font-bold mb-1 text-sm'>Continuous Learning:</h3>
-            <ul className='list-disc ml-6 space-y-0.5 text-xs'>
-              <li>
-                Regular participation in online technology communities and
-                forums
-              </li>
-              <li>
-                Staying current with emerging web technologies and best
-                practices
-              </li>
-              <li>
-                Attending virtual conferences and webinars on software
-                development
-              </li>
-              <li>Contributing to open-source projects when possible</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className='mb-6 print-break-inside-avoid'>
-          <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
-            LANGUAGES
-          </h2>
-          <div className='space-y-1 text-xs'>
-            <p>
-              <strong>Thai:</strong> Native proficiency
-            </p>
-            <p>
-              <strong>English:</strong> Professional working proficiency
-            </p>
-          </div>
-        </section>
-
-        <section className='mb-6 print-break-inside-avoid'>
-          <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
-            INTERESTS & ACTIVITIES
-          </h2>
-          <p className='leading-relaxed text-xs'>
-            Technology innovation, software architecture design, mobile
-            application development, system optimization, collaborative software
-            development, and contributing to the tech community through
-            knowledge sharing and mentorship.
-          </p>
-        </section>
-
-        <section className='mb-6 print-break-inside-avoid'>
-          <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
-            REFERENCES
-          </h2>
-          <p className='italic text-xs'>Available upon request</p>
-        </section>
+        {/* Optional sections removed or condensed for brevity */}
 
         {/* Footer with date */}
         {/* <footer className='text-center text-sm border-t border-black pt-4 mt-8'>
