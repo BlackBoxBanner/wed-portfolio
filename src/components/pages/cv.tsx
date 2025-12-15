@@ -164,7 +164,7 @@ const CVPage = () => {
           <h2 className='text-lg font-bold mb-3 border-b border-black pb-1'>
             PROFESSIONAL EXPERIENCE
           </h2>
-          {experiences.slice(0, 2).map((exp, index) => (
+          {experiences.map((exp, index) => (
             <div key={index} className='mb-3 print-break-inside-avoid'>
               <h3 className='text-base font-bold'>{exp.title}</h3>
               <p className='font-semibold text-sm'>{exp.company}</p>
