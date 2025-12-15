@@ -1,42 +1,10 @@
-import {
-  SiCss3,
-  SiExpress,
-  SiJavascript,
-  SiMongodb,
-  SiNextdotjs,
-  SiPrisma,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-  SiNodedotjs,
-  SiHtml5,
-  SiExpo,
-  SiGit,
-  SiGithub,
-  SiPostgresql,
-  SiDocker,
-  SiSvelte,
-  SiVuedotjs,
-  SiAmazonaws,
-  SiCloudflare,
-} from 'react-icons/si';
 import { Heading2, Paragraph } from '@/components/ui/typography';
-
-// Define the SkillProps type for the Skill component
-type SkillProps = {
-  name: string;
-  Icon: React.ComponentType<{ className?: string }>;
-  proficiency: 'Beginner' | 'Intermediate' | 'Advanced';
-};
-
-type SkillCategoryProps = {
-  title: string;
-  skills: SkillProps[];
-  description: string;
-};
+import { currentLearning, skillCategories } from '@/data';
+import type { SkillCategory as SkillCategoryType, SkillItem } from '@/data';
+import type { FC } from 'react';
 
 // Skill Component
-const Skill: React.FC<SkillProps> = ({ name, Icon, proficiency }) => {
+const Skill: FC<SkillItem> = ({ name, Icon, proficiency }) => {
   const getProficiencyConfig = (level: string) => {
     switch (level) {
       case 'Advanced':
@@ -87,7 +55,7 @@ const Skill: React.FC<SkillProps> = ({ name, Icon, proficiency }) => {
 };
 
 // SkillCategory Component
-const SkillCategory: React.FC<SkillCategoryProps> = ({
+const SkillCategory: FC<SkillCategoryType> = ({
   title,
   skills,
   description,
@@ -108,41 +76,7 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
 };
 
 // SkillSection Component
-const SkillSection: React.FC = () => {
-  const frontendSkills: SkillProps[] = [
-    { name: 'React', Icon: SiReact, proficiency: 'Advanced' },
-    { name: 'Next.js', Icon: SiNextdotjs, proficiency: 'Advanced' },
-    { name: 'TypeScript', Icon: SiTypescript, proficiency: 'Advanced' },
-    { name: 'JavaScript', Icon: SiJavascript, proficiency: 'Advanced' },
-    { name: 'TailwindCSS', Icon: SiTailwindcss, proficiency: 'Advanced' },
-    { name: 'HTML5', Icon: SiHtml5, proficiency: 'Advanced' },
-    { name: 'CSS3', Icon: SiCss3, proficiency: 'Advanced' },
-    { name: 'SvelteKit', Icon: SiSvelte, proficiency: 'Intermediate' },
-    { name: 'Vue.js', Icon: SiVuedotjs, proficiency: 'Beginner' },
-  ];
-
-  const backendSkills: SkillProps[] = [
-    { name: 'Node.js', Icon: SiNodedotjs, proficiency: 'Intermediate' },
-    { name: 'Express.js', Icon: SiExpress, proficiency: 'Intermediate' },
-    { name: 'Elysia.js', Icon: SiNodedotjs, proficiency: 'Intermediate' },
-    { name: 'MongoDB', Icon: SiMongodb, proficiency: 'Intermediate' },
-    { name: 'PostgreSQL', Icon: SiPostgresql, proficiency: 'Intermediate' },
-    { name: 'Prisma', Icon: SiPrisma, proficiency: 'Intermediate' },
-  ];
-
-  const mobileSkills: SkillProps[] = [
-    { name: 'React Native', Icon: SiReact, proficiency: 'Intermediate' },
-    { name: 'Expo', Icon: SiExpo, proficiency: 'Intermediate' },
-  ];
-
-  const toolsSkills: SkillProps[] = [
-    { name: 'Git', Icon: SiGit, proficiency: 'Advanced' },
-    { name: 'GitHub', Icon: SiGithub, proficiency: 'Advanced' },
-    { name: 'Docker', Icon: SiDocker, proficiency: 'Beginner' },
-    { name: 'AWS', Icon: SiAmazonaws, proficiency: 'Beginner' },
-    { name: 'Cloudflare', Icon: SiCloudflare, proficiency: 'Beginner' },
-  ];
-
+const SkillSection: FC = () => {
   return (
     <section className='space-y-12' id='skill'>
       <div className='text-center'>
@@ -157,29 +91,14 @@ const SkillSection: React.FC = () => {
       </div>
 
       <div className='space-y-12'>
-        <SkillCategory
-          title='Frontend Development'
-          description='Building modern, responsive, and interactive user interfaces'
-          skills={frontendSkills}
-        />
-
-        <SkillCategory
-          title='Backend Development'
-          description='Creating robust server-side applications and APIs'
-          skills={backendSkills}
-        />
-
-        <SkillCategory
-          title='Mobile Development'
-          description='Cross-platform mobile applications with native performance'
-          skills={mobileSkills}
-        />
-
-        <SkillCategory
-          title='Tools & DevOps'
-          description='Development tools and deployment workflows'
-          skills={toolsSkills}
-        />
+        {skillCategories.map((category) => (
+          <SkillCategory
+            key={category.title}
+            title={category.title}
+            description={category.description}
+            skills={category.skills}
+          />
+        ))}
       </div>
 
       <div className='bg-muted/50 rounded-lg p-8 text-center'>
@@ -191,18 +110,14 @@ const SkillSection: React.FC = () => {
           latest technologies.
         </Paragraph>
         <div className='flex flex-wrap justify-center gap-4 text-sm'>
-          <span className='bg-primary/10 text-primary px-3 py-1 rounded-full'>
-            CI/CD Pipelines
-          </span>
-          <span className='bg-primary/10 text-primary px-3 py-1 rounded-full'>
-            Microservices
-          </span>
-          <span className='bg-primary/10 text-primary px-3 py-1 rounded-full'>
-            Cloud Infrastructure
-          </span>
-          <span className='bg-primary/10 text-primary px-3 py-1 rounded-full'>
-            Advanced React Patterns
-          </span>
+          {currentLearning.map((topic) => (
+            <span
+              key={topic}
+              className='bg-primary/10 text-primary px-3 py-1 rounded-full'
+            >
+              {topic}
+            </span>
+          ))}
         </div>
       </div>
     </section>

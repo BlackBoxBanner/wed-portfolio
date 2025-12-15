@@ -1,7 +1,6 @@
 'use client';
 
 import { Heading1, Heading2, Paragraph } from '@/components/ui/typography';
-import { differenceInYears } from 'date-fns';
 import {
   Mail,
   Phone,
@@ -19,21 +18,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
-import {
-  personalInfo,
-  experiences,
-  educations,
-  skillCategories,
-  type ExperienceType,
-  type EducationType,
-  type SkillCategory,
-} from '@/lib/portfolio-data';
+import { educations, experiences, personalInfo, skillCategories } from '@/data';
 import { printResume, shareResume } from '@/lib/resume-utils';
 import { LuDot } from 'react-icons/lu';
 
 const ResumePage = () => {
-  const birthDate = new Date(2001, 7, 21);
-  const currentAge = differenceInYears(new Date(), birthDate);
   const [isEditingSummary, setIsEditingSummary] = useState(false);
   const [professionalSummary, setProfessionalSummary] = useState(
     `${personalInfo.summary} Recently completed Computer Engineering degree at KMUTT with hands-on experience leading full-stack development projects and working with diverse teams.`,
@@ -98,11 +87,10 @@ const ResumePage = () => {
                 {personalInfo.name}
               </Heading1>
               <Paragraph className='text-xl text-blue-100 mb-4'>
-                Full-Stack Developer
+                {personalInfo.title}
               </Paragraph>
               <Paragraph className='text-lg text-blue-100 max-w-2xl mx-auto'>
-                Passionate about building web and mobile applications that solve
-                real-world problems
+                {personalInfo.summary}
               </Paragraph>
             </div>
           </header>
@@ -358,7 +346,7 @@ const ResumePage = () => {
                         key={skillIndex}
                         className='bg-primary/10 text-primary px-3 py-1 rounded-full text-sm'
                       >
-                        {skill}
+                        {skill.name}
                       </span>
                     ))}
                   </div>
@@ -377,11 +365,8 @@ const ResumePage = () => {
             <h1 className='text-3xl font-bold text-gray-900 mb-2'>
               {personalInfo.name}
             </h1>
-            <p className='text-lg text-gray-700 mb-3'>Full-Stack Developer</p>
-            <p className='text-sm text-gray-600'>
-              Passionate about building web and mobile applications that solve
-              real-world problems
-            </p>
+            <p className='text-lg text-gray-700 mb-3'>{personalInfo.title}</p>
+            <p className='text-sm text-gray-600'>{personalInfo.summary}</p>
           </header>
 
           {/* Contact Information */}
@@ -549,7 +534,7 @@ const ResumePage = () => {
                     {category.title}
                   </h3>
                   <p className='text-xs text-gray-700 leading-relaxed'>
-                    {category.skills.join(', ')}
+                    {category.skills.map((skill) => skill.name).join(', ')}
                   </p>
                 </div>
               ))}

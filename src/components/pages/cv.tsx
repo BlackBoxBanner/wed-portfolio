@@ -1,22 +1,19 @@
 'use client';
 
-import { differenceInYears } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Edit3, Save, X } from 'lucide-react';
 import { useState } from 'react';
 import {
-  personalInfo,
-  experiences,
   educations,
-  skillCategories,
+  experiences,
+  personalInfo,
   projects,
-} from '@/lib/portfolio-data';
+  skillCategories,
+} from '@/data';
 import { printResume, shareResume } from '@/lib/resume-utils';
 
 const CVPage = () => {
-  const birthDate = new Date(2001, 7, 21);
-  const currentAge = differenceInYears(new Date(), birthDate);
   const [isEditingSummary, setIsEditingSummary] = useState(false);
   const [professionalSummary, setProfessionalSummary] = useState(
     `${personalInfo.summary} Passionate software engineer with hands-on experience in web and mobile development, seeking to leverage strong technical and problem-solving skills in a dynamic team.`,
@@ -206,7 +203,7 @@ const CVPage = () => {
                 ))}
               </ul>
               <p className='text-xs'>
-                Tech: {project.technologies.slice(0, 3).join(', ')}
+                Tech: {project.techStack.slice(0, 3).join(', ')}
               </p>
             </div>
           ))}
@@ -221,7 +218,10 @@ const CVPage = () => {
             <div key={index} className='mb-2'>
               <h3 className='font-bold mb-1 text-sm'>{category.title}:</h3>
               <p className='leading-relaxed text-xs'>
-                {category.skills.slice(0, 6).join(', ')}
+                {category.skills
+                  .slice(0, 6)
+                  .map((skill) => skill.name)
+                  .join(', ')}
               </p>
             </div>
           ))}
