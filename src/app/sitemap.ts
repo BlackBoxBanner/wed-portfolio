@@ -1,10 +1,10 @@
-import { MetadataRoute } from 'next'
-import { siteConfig } from '@/lib/metadata'
-import { getAllBlogPosts } from '@/lib/blog/utils'
+import { MetadataRoute } from 'next';
+import { siteConfig } from '@/lib/metadata';
+import { getAllBlogPosts } from '@/lib/blog/utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const blogPosts = getAllBlogPosts()
-  
+  const blogPosts = getAllBlogPosts();
+
   const staticPages = [
     {
       url: siteConfig.url,
@@ -48,14 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
-  ]
+  ];
 
   const blogPages = blogPosts.map((post) => ({
     url: `${siteConfig.url}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
-  }))
+  }));
 
-  return [...staticPages, ...blogPages]
+  return [...staticPages, ...blogPages];
 }

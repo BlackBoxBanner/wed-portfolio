@@ -1,34 +1,51 @@
 ---
-title: "Taking My Time: The Journey of Updating My Web Portfolio"
-description: "A personal reflection on the process of updating my portfolio, the challenges I faced, and the lessons learned along the way."
-date: "2025-12-05"
-author: "Sueksit Vachirakumthorn"
-tags: ["Personal", "Portfolio", "Web Development", "Career", "Reflection"]
-ogImage: "/og-image.jpg"
+title: 'Taking My Time: The Journey of Updating My Web Portfolio'
+description:
+  'A personal reflection on the process of updating my portfolio, the challenges
+  I faced, and the lessons learned along the way.'
+date: '2025-12-05'
+author: 'Sueksit Vachirakumthorn'
+tags: ['Personal', 'Portfolio', 'Web Development', 'Career', 'Reflection']
+ogImage: '/og-image.jpg'
 ---
 
-As developers, we often tell ourselves we'll "get around to updating our portfolio soon." For me, "soon" turned into months, and those months somehow stretched into what felt like forever. But sometimes, taking your time isn't procrastination—it's preparation.
+As developers, we often tell ourselves we'll "get around to updating our
+portfolio soon." For me, "soon" turned into months, and those months somehow
+stretched into what felt like forever. But sometimes, taking your time isn't
+procrastination—it's preparation.
 
 ## The Weight of First Impressions
 
-Your portfolio isn't just a collection of projects; it's your digital handshake, your first impression, your chance to say "this is who I am" without uttering a word. That weight can be paralyzing. Every color choice, every animation, every line of code represents you. No pressure, right?
+Your portfolio isn't just a collection of projects; it's your digital handshake,
+your first impression, your chance to say "this is who I am" without uttering a
+word. That weight can be paralyzing. Every color choice, every animation, every
+line of code represents you. No pressure, right?
 
-I found myself caught in analysis paralysis, endlessly browsing other developers' portfolios, bookmarking design inspiration, and starting projects only to abandon them when they didn't feel "perfect" enough.
+I found myself caught in analysis paralysis, endlessly browsing other
+developers' portfolios, bookmarking design inspiration, and starting projects
+only to abandon them when they didn't feel "perfect" enough.
 
 ## The False Start Symphony
 
 Let me count the ways I've started this portfolio:
 
-- **The React Overengineering Phase**: Where I tried to build a portfolio that could handle the traffic of Facebook and had more features than my actual projects.
-- **The Animation Obsession Era**: Every element needed to bounce, fade, slide, or rotate. My portfolio looked like a carnival
-- **The Minimalist Monk Period**: Three white pages with black text. Very zen. Very boring.
-- **The Framework Hopping Adventure**: Vue, Svelte, Angular, back to React, then "maybe vanilla JS?"
+- **The React Overengineering Phase**: Where I tried to build a portfolio that
+  could handle the traffic of Facebook and had more features than my actual
+  projects.
+- **The Animation Obsession Era**: Every element needed to bounce, fade, slide,
+  or rotate. My portfolio looked like a carnival
+- **The Minimalist Monk Period**: Three white pages with black text. Very zen.
+  Very boring.
+- **The Framework Hopping Adventure**: Vue, Svelte, Angular, back to React, then
+  "maybe vanilla JS?"
 
-Each restart taught me something valuable, even if I didn't realize it at the time.
+Each restart taught me something valuable, even if I didn't realize it at the
+time.
 
 ## Finding My Voice (And My Stack)
 
-The breakthrough came when I stopped asking "What's the best way to build this?" and started asking "What story do I want to tell?"
+The breakthrough came when I stopped asking "What's the best way to build this?"
+and started asking "What story do I want to tell?"
 
 ### The Story I Wanted to Tell
 
@@ -49,10 +66,10 @@ interface Portfolio {
 }
 
 const myPortfolio: Portfolio = {
-  story: "Clean code, better user experiences",
+  story: 'Clean code, better user experiences',
   skills: [...learningContinuously],
   projects: [...thingsThatMatter],
-  personality: "Curious problem-solver"
+  personality: 'Curious problem-solver',
 };
 ```
 
@@ -63,39 +80,50 @@ After all that exploration, I landed on:
 - **Next.js 14**: Because SSG + great DX = happy developer
 - **TypeScript**: Type safety is self-care
 - **Tailwind CSS**: Utility-first means faster iterations
-- **MDX for blogging**: Because sometimes you want to embed a React component in your rant about JavaScript
+- **MDX for blogging**: Because sometimes you want to embed a React component in
+  your rant about JavaScript
 
 ### Why These Choices Mattered
 
 Each technology choice reflected a value:
+
 - Next.js: Performance and SEO matter to users
-- TypeScript: Code quality matters for maintainability  
+- TypeScript: Code quality matters for maintainability
 - Tailwind: Development speed matters for sanity
 - MDX: Flexibility matters for expression
 
 ## The Blog Decision
 
-Adding a blog felt scary. "What if I have nothing interesting to say?" But then I realized—the journey itself is interesting. The struggles, the false starts, the small victories.
+Adding a blog felt scary. "What if I have nothing interesting to say?" But then
+I realized—the journey itself is interesting. The struggles, the false starts,
+the small victories.
 
-This very post you're reading? It exists because I decided that authenticity beats perfection.
+This very post you're reading? It exists because I decided that authenticity
+beats perfection.
 
 ## Lessons from Taking My Time
 
 ### 1. Perfectionism is the Enemy of Progress
 
-My first portfolio attempts failed because I was optimizing for a theoretical perfect visitor rather than real human beings who just want to know if I can solve their problems.
+My first portfolio attempts failed because I was optimizing for a theoretical
+perfect visitor rather than real human beings who just want to know if I can
+solve their problems.
 
 ### 2. Your Portfolio Should Reflect Your Process
 
-The way you build your portfolio says as much about you as what's in it. Clean commits, thoughtful architecture, and attention to accessibility aren't just good practices—they're demonstrations of your professionalism.
+The way you build your portfolio says as much about you as what's in it. Clean
+commits, thoughtful architecture, and attention to accessibility aren't just
+good practices—they're demonstrations of your professionalism.
 
 ### 3. Iteration Beats Revolution
 
-Instead of completely restarting each time, I should have been iterating. That's how real products improve, and portfolios are products too.
+Instead of completely restarting each time, I should have been iterating. That's
+how real products improve, and portfolios are products too.
 
 ### 4. Done is Better Than Perfect
 
-A portfolio that exists and tells your story is infinitely better than the perfect portfolio that lives only in your imagination.
+A portfolio that exists and tells your story is infinitely better than the
+perfect portfolio that lives only in your imagination.
 
 ## The Tech Stack Reflection
 
@@ -105,8 +133,8 @@ Looking back at my journey, here's what I learned about each technology choice:
 // Sometimes the simple solution is the right solution
 const PortfolioSection = ({ title, children }) => {
   return (
-    <section className="py-16">
-      <h2 className="text-3xl font-bold mb-8">{title}</h2>
+    <section className='py-16'>
+      <h2 className='text-3xl font-bold mb-8'>{title}</h2>
       {children}
     </section>
   );
@@ -117,7 +145,9 @@ const PortfolioSection = ({ title, children }) => {
 
 ## Building in Public (Sort Of)
 
-While I was building this portfolio, I realized I was learning things worth sharing:
+While I was building this portfolio, I realized I was learning things worth
+sharing:
+
 - How to structure a Next.js project for growth
 - Balancing performance with user experience
 - Making design decisions that reflect your personality
@@ -125,16 +155,20 @@ While I was building this portfolio, I realized I was learning things worth shar
 
 ## What's Next?
 
-This portfolio isn't "done"—it's version 1.0. It represents who I am today, with room to grow into who I'll be tomorrow. The blog gives me a place to share that journey.
+This portfolio isn't "done"—it's version 1.0. It represents who I am today, with
+room to grow into who I'll be tomorrow. The blog gives me a place to share that
+journey.
 
 Some ideas brewing for future posts:
+
 - Deep dives into interesting bugs I've solved
 - Reflections on new technologies I'm exploring
 - The human side of software development
 
 ## To Fellow Procrastinating Portfolio Builders
 
-If you're reading this while your portfolio sits in development purgatory, here's my advice:
+If you're reading this while your portfolio sits in development purgatory,
+here's my advice:
 
 1. **Start with your story**, not your stack
 2. **Pick technologies you're comfortable with** (you can always refactor later)
@@ -146,14 +180,21 @@ Your portfolio doesn't need to be revolutionary. It needs to be you.
 
 ## Final Thoughts
 
-Taking my time with this portfolio update taught me that sometimes slow progress is still progress. Each false start, each abandoned approach, each late night questioning my color choices—it all contributed to the final result.
+Taking my time with this portfolio update taught me that sometimes slow progress
+is still progress. Each false start, each abandoned approach, each late night
+questioning my color choices—it all contributed to the final result.
 
-The portfolio you see today isn't just the product of the last few weeks of coding. It's the culmination of months of thinking, experimenting, and yes, procrastinating. And maybe that's exactly what it needed to be.
+The portfolio you see today isn't just the product of the last few weeks of
+coding. It's the culmination of months of thinking, experimenting, and yes,
+procrastinating. And maybe that's exactly what it needed to be.
 
-Now, if you'll excuse me, I have about seventeen ideas for improving the design. But this time, I'm going to implement them one at a time, in public, with blog posts documenting the journey.
+Now, if you'll excuse me, I have about seventeen ideas for improving the design.
+But this time, I'm going to implement them one at a time, in public, with blog
+posts documenting the journey.
 
 Because taking your time isn't about being slow—it's about being thoughtful.
 
 ---
 
-*What's your portfolio story? I'd love to hear about your own journey with building (or rebuilding) your developer portfolio. Feel free to reach out!*
+_What's your portfolio story? I'd love to hear about your own journey with
+building (or rebuilding) your developer portfolio. Feel free to reach out!_

@@ -25,7 +25,7 @@ export function getAllBlogPosts(): BlogPost[] {
         const filePath = path.join(BLOG_CONTENT_PATH, file);
         const fileContents = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContents);
-        
+
         return {
           slug: file.replace('.mdx', ''),
           title: data.title || '',
@@ -72,17 +72,17 @@ export function getBlogPost(slug: string): BlogPost | null {
 
 export function getBlogPostsByTag(tag: string): BlogPost[] {
   const allPosts = getAllBlogPosts();
-  return allPosts.filter(post => post.tags?.includes(tag));
+  return allPosts.filter((post) => post.tags?.includes(tag));
 }
 
 export function getAllTags(): string[] {
   const allPosts = getAllBlogPosts();
   const tags = new Set<string>();
-  
-  allPosts.forEach(post => {
-    post.tags?.forEach(tag => tags.add(tag));
+
+  allPosts.forEach((post) => {
+    post.tags?.forEach((tag) => tags.add(tag));
   });
-  
+
   return Array.from(tags).sort();
 }
 

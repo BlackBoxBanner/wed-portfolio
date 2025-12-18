@@ -1,13 +1,16 @@
 ---
-title: "Building Modern Web Applications with TypeScript"
-description: "Explore the benefits of using TypeScript in modern web development and learn best practices for building scalable applications."
-date: "2024-11-28"
-author: "Sueksit Vachirakumthorn"
-tags: ["TypeScript", "JavaScript", "Web Development", "Best Practices"]
-ogImage: "/og-image.jpg"
+title: 'Building Modern Web Applications with TypeScript'
+description:
+  'Explore the benefits of using TypeScript in modern web development and learn
+  best practices for building scalable applications.'
+date: '2024-11-28'
+author: 'Sueksit Vachirakumthorn'
+tags: ['TypeScript', 'JavaScript', 'Web Development', 'Best Practices']
+ogImage: '/og-image.jpg'
 ---
 
-TypeScript has revolutionized the way we build web applications. As a superset of JavaScript, it brings static typing to the dynamic world of web development.
+TypeScript has revolutionized the way we build web applications. As a superset
+of JavaScript, it brings static typing to the dynamic world of web development.
 
 ## Why Choose TypeScript?
 
@@ -29,7 +32,7 @@ function getUserById(id: number): User | null {
 }
 
 // TypeScript will catch this error
-const user = getUserById("123"); // Error: Argument of type 'string' is not assignable to parameter of type 'number'
+const user = getUserById('123'); // Error: Argument of type 'string' is not assignable to parameter of type 'number'
 ```
 
 ### 2. Enhanced IDE Support
@@ -173,7 +176,7 @@ const BlogPage: NextPage<Props> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = await fetchBlogPosts();
-  
+
   return {
     props: {
       posts,
@@ -193,7 +196,8 @@ TypeScript brings numerous benefits to web development:
 - **Better Team Collaboration**: Clear interfaces and contracts
 - **Scalability**: Easier to maintain large codebases
 
-Start small by gradually adopting TypeScript in your projects. The investment in learning TypeScript pays off quickly in terms of productivity and code quality.
+Start small by gradually adopting TypeScript in your projects. The investment in
+learning TypeScript pays off quickly in terms of productivity and code quality.
 
 ## Resources
 

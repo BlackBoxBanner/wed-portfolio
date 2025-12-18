@@ -19,7 +19,7 @@ export default function FloatingSpores() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Create ambient orb-like spores similar to your profile decoration
     const colors = [
       'rgba(99, 102, 241, 0.1)', // Indigo
@@ -27,14 +27,14 @@ export default function FloatingSpores() {
       'rgba(59, 130, 246, 0.1)', // Blue - like your decoration
       'rgba(16, 185, 129, 0.1)', // Emerald
       'rgba(245, 158, 11, 0.1)', // Amber
-      'rgba(239, 68, 68, 0.1)',  // Red
+      'rgba(239, 68, 68, 0.1)', // Red
       'rgba(168, 85, 247, 0.1)', // Purple
-      'rgba(34, 197, 94, 0.1)',  // Green
+      'rgba(34, 197, 94, 0.1)', // Green
     ];
 
     const generateSpores = () => {
       const newSpores: Spore[] = [];
-      
+
       // Large ambient orbs (foreground)
       for (let i = 0; i < 4; i++) {
         newSpores.push({
@@ -48,7 +48,7 @@ export default function FloatingSpores() {
           layer: 'foreground',
         });
       }
-      
+
       setSpores(newSpores);
     };
 
@@ -58,7 +58,7 @@ export default function FloatingSpores() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div className='fixed inset-0 pointer-events-none z-0 overflow-hidden'>
       {spores.map((spore) => (
         <div
           key={spore.id}

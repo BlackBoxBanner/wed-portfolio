@@ -1,25 +1,31 @@
 ---
-title: "Mastering CSS Grid and Flexbox in 2024"
-description: "A comprehensive guide to modern CSS layout techniques using Grid and Flexbox for responsive web design."
-date: "2024-11-20"
-author: "Sueksit Vachirakumthorn"
-tags: ["CSS", "Web Design", "Responsive Design", "Frontend"]
-ogImage: "/og-image.jpg"
+title: 'Mastering CSS Grid and Flexbox in 2024'
+description:
+  'A comprehensive guide to modern CSS layout techniques using Grid and Flexbox
+  for responsive web design.'
+date: '2024-11-20'
+author: 'Sueksit Vachirakumthorn'
+tags: ['CSS', 'Web Design', 'Responsive Design', 'Frontend']
+ogImage: '/og-image.jpg'
 ---
 
-Modern web development requires solid understanding of CSS layout techniques. In this comprehensive guide, we'll explore CSS Grid and Flexbox - the two most powerful layout systems available today.
+Modern web development requires solid understanding of CSS layout techniques. In
+this comprehensive guide, we'll explore CSS Grid and Flexbox - the two most
+powerful layout systems available today.
 
 ## Understanding the Fundamentals
 
 ### When to Use Flexbox vs Grid
 
 **Use Flexbox for:**
+
 - One-dimensional layouts (rows OR columns)
 - Component-level layouts
 - Distributing space among items
 - Aligning items within containers
 
 **Use Grid for:**
+
 - Two-dimensional layouts (rows AND columns)
 - Page-level layouts
 - Complex grid systems
@@ -112,14 +118,14 @@ Modern web development requires solid understanding of CSS layout techniques. In
 ```css
 .layout {
   display: grid;
-  grid-template-columns: 
-    [sidebar-start] 250px 
-    [sidebar-end main-start] 1fr 
+  grid-template-columns:
+    [sidebar-start] 250px
+    [sidebar-end main-start] 1fr
     [main-end];
-  grid-template-rows: 
-    [header-start] 60px 
-    [header-end content-start] 1fr 
-    [content-end footer-start] 40px 
+  grid-template-rows:
+    [header-start] 60px
+    [header-end content-start] 1fr
+    [content-end footer-start] 40px
     [footer-end];
 }
 
@@ -135,19 +141,29 @@ Modern web development requires solid understanding of CSS layout techniques. In
 .page-layout {
   display: grid;
   grid-template-areas:
-    "header header header"
-    "sidebar main aside"
-    "footer footer footer";
+    'header header header'
+    'sidebar main aside'
+    'footer footer footer';
   grid-template-columns: 200px 1fr 200px;
   grid-template-rows: 60px 1fr 40px;
   min-height: 100vh;
 }
 
-.header { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.main { grid-area: main; }
-.aside { grid-area: aside; }
-.footer { grid-area: footer; }
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.main {
+  grid-area: main;
+}
+.aside {
+  grid-area: aside;
+}
+.footer {
+  grid-area: footer;
+}
 ```
 
 #### 3. Responsive Grid
@@ -176,9 +192,9 @@ The real power comes from using both together:
 .page {
   display: grid;
   grid-template-areas:
-    "header"
-    "main"
-    "footer";
+    'header'
+    'main'
+    'footer';
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
 }
@@ -235,9 +251,9 @@ The real power comes from using both together:
 ```css
 .content {
   padding-inline: 2rem; /* left and right in LTR */
-  padding-block: 1rem;  /* top and bottom */
+  padding-block: 1rem; /* top and bottom */
   margin-inline-start: auto; /* margin-left in LTR */
-  margin-inline-end: auto;   /* margin-right in LTR */
+  margin-inline-end: auto; /* margin-right in LTR */
 }
 ```
 
@@ -279,14 +295,16 @@ The real power comes from using both together:
 
 ## Conclusion
 
-Mastering CSS Grid and Flexbox opens up endless possibilities for creating beautiful, responsive layouts. Key takeaways:
+Mastering CSS Grid and Flexbox opens up endless possibilities for creating
+beautiful, responsive layouts. Key takeaways:
 
 - **Use the right tool for the job**: Grid for 2D layouts, Flexbox for 1D
 - **Mobile-first approach**: Start with mobile layouts and enhance
 - **Progressive enhancement**: Use feature queries for better browser support
 - **Practice regularly**: Build projects to reinforce your understanding
 
-Start implementing these techniques in your projects, and you'll soon discover how powerful modern CSS can be!
+Start implementing these techniques in your projects, and you'll soon discover
+how powerful modern CSS can be!
 
 ## Resources
 

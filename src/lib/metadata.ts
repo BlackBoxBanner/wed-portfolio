@@ -1,66 +1,69 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 export const siteConfig = {
-  name: "Sueksit Vachirakumthorn",
-  title: "Sueksit Vachirakumthorn | Full-Stack Developer",
-  description: "Full-Stack Developer passionate about building web and mobile applications that solve real-world problems. Specializing in React, Next.js, React Native, and modern web technologies.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://sueksit.vercel.app/",
-  ogImage: "/og-image.jpg",
+  name: 'Sueksit Vachirakumthorn',
+  title: 'Sueksit Vachirakumthorn | Full-Stack Developer',
+  description:
+    'Full-Stack Developer passionate about building web and mobile applications that solve real-world problems. Specializing in React, Next.js, React Native, and modern web technologies.',
+  url: process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app/',
+  ogImage: '/og-image.jpg',
   keywords: [
-    "Sueksit Vachirakumthorn",
-    "Sueksit",
-    "Vachirakumthorn", 
-    "Full-Stack Developer",
-    "React Developer",
-    "Next.js Developer", 
-    "React Native Developer",
-    "TypeScript Developer",
-    "JavaScript Developer",
-    "Web Developer",
-    "Mobile App Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Software Engineer",
-    "Thai Developer",
-    "Portfolio",
-    "Sueksit Vachirakumthorn Portfolio",
-    "Web Development Portfolio",
-    "Software Developer Portfolio",
-    "Thailand Developer",
-    "Bangkok Developer",
-    "Freelance Developer",
-    "Remote Developer",
-    "Tech Professional",
-    "Programmer",
-    "Software Development",
-    "Web Design",
-    "UI/UX Developer"
+    'Sueksit Vachirakumthorn',
+    'Sueksit',
+    'Vachirakumthorn',
+    'Full-Stack Developer',
+    'React Developer',
+    'Next.js Developer',
+    'React Native Developer',
+    'TypeScript Developer',
+    'JavaScript Developer',
+    'Web Developer',
+    'Mobile App Developer',
+    'Frontend Developer',
+    'Backend Developer',
+    'Software Engineer',
+    'Thai Developer',
+    'Portfolio',
+    'Sueksit Vachirakumthorn Portfolio',
+    'Web Development Portfolio',
+    'Software Developer Portfolio',
+    'Thailand Developer',
+    'Bangkok Developer',
+    'Freelance Developer',
+    'Remote Developer',
+    'Tech Professional',
+    'Programmer',
+    'Software Development',
+    'Web Design',
+    'UI/UX Developer',
   ],
   author: {
-    name: "Sueksit Vachirakumthorn",
-    email: "svac.mai+work@gmail.com",
-    linkedin: "sueksit",
-    github: "BlackBoxBanner"
+    name: 'Sueksit Vachirakumthorn',
+    email: 'svac.mai+work@gmail.com',
+    linkedin: 'sueksit',
+    github: 'BlackBoxBanner',
   },
-  creator: "Sueksit Vachirakumthorn",
-  publisher: "Sueksit Vachirakumthorn"
-}
+  creator: 'Sueksit Vachirakumthorn',
+  publisher: 'Sueksit Vachirakumthorn',
+};
 
 export function generateMetadata({
   title = siteConfig.title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
   url = siteConfig.url,
-  noIndex = false
+  noIndex = false,
 }: {
-  title?: string
-  description?: string
-  image?: string
-  url?: string
-  noIndex?: boolean
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  noIndex?: boolean;
 } = {}): Metadata {
-  const ogImage = image.startsWith('http') ? image : `${siteConfig.url}${image}`
-  
+  const ogImage = image.startsWith('http')
+    ? image
+    : `${siteConfig.url}${image}`;
+
   return {
     title,
     description,
@@ -130,7 +133,7 @@ export function generateMetadata({
       'msapplication-TileColor': '#000000',
       'theme-color': '#ffffff',
     },
-  }
+  };
 }
 
 export function generateStructuredData() {
@@ -148,20 +151,20 @@ export function generateStructuredData() {
       name: 'Software Developer',
       occupationLocation: {
         '@type': 'Country',
-        name: 'Thailand'
-      }
+        name: 'Thailand',
+      },
     },
     worksFor: {
       '@type': 'Organization',
-      name: 'Freelance'
+      name: 'Freelance',
     },
     nationality: {
       '@type': 'Country',
-      name: 'Thailand'
+      name: 'Thailand',
     },
     homeLocation: {
       '@type': 'Place',
-      name: 'Thailand'
+      name: 'Thailand',
     },
     email: siteConfig.author.email,
     sameAs: [
@@ -183,18 +186,18 @@ export function generateStructuredData() {
       'Software Engineering',
       'UI/UX Development',
       'Database Management',
-      'API Development'
+      'API Development',
     ],
     subjectOf: {
       '@type': 'WebSite',
       '@id': siteConfig.url,
       name: siteConfig.name,
-      description: siteConfig.description
+      description: siteConfig.description,
     },
     '@id': siteConfig.url,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteConfig.url
-    }
-  }
+      '@id': siteConfig.url,
+    },
+  };
 }
