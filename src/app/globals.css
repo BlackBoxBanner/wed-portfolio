@@ -196,7 +196,7 @@
 }
 
 /* ============================================
-   PRINT STYLES FOR RESUME
+   PRINT STYLES FOR CV - ATS OPTIMIZED
    ============================================ */
 
 @media print {
@@ -217,13 +217,10 @@
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-    font-family:
-      'Segoe UI',
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    font-family: Arial, Calibri, 'Times New Roman', sans-serif !important;
+    color: black !important;
   }
 
   /* Hide all website elements except print resume */
@@ -234,6 +231,11 @@
   .print-resume {
     display: block !important;
     padding: 0 !important;
+    font-family: Arial, Calibri, 'Times New Roman', sans-serif !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    color: black !important;
+    background: white !important;
   }
 
   /* Page break controls */
