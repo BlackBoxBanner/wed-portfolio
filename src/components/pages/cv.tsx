@@ -1,8 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Edit3, Save, X } from 'lucide-react';
 import { useState } from 'react';
 import {
   educations,
@@ -14,11 +12,6 @@ import {
 import { printResume, shareResume } from '@/lib/resume-utils';
 
 const CVPage = () => {
-  const [isEditingSummary, setIsEditingSummary] = useState(false);
-  const [professionalSummary, setProfessionalSummary] = useState(
-    `Full-Stack Developer with demonstrated expertise in building scalable web and mobile applications. Delivered multi-vendor e-commerce platform serving 100+ users. Proficient in React, Next.js, React Native, TypeScript, Node.js, and MongoDB. Seeking full-time opportunities to build high-impact solutions.`,
-  );
-
   const formatDateRange = (
     fromMonth: string,
     fromYear: number,
@@ -84,74 +77,6 @@ const CVPage = () => {
             {personalInfo.website.replace('https://', '')}
           </p>
         </header>
-
-        {/* PROFESSIONAL SUMMARY - Impact-focused */}
-        <section className='mb-5 print:mb-3'>
-          <h2
-            style={{
-              fontSize: '13px',
-              fontWeight: 'bold',
-              margin: '0 0 3px 0',
-              borderBottom: '1px solid black',
-              paddingBottom: '2px',
-            }}
-          >
-            PROFESSIONAL SUMMARY
-          </h2>
-          {isEditingSummary ? (
-            <div className='flex gap-2 mb-2 print:hidden'>
-              <Button
-                onClick={() => setIsEditingSummary(false)}
-                variant='outline'
-                size='sm'
-                className='flex items-center gap-1 text-xs h-6'
-              >
-                <Save className='w-3 h-3' />
-                Save
-              </Button>
-              <Button
-                onClick={() => {
-                  setProfessionalSummary(
-                    'Full-Stack Developer with demonstrated expertise in building scalable web and mobile applications. Delivered multi-vendor e-commerce platform serving 100+ users. Proficient in React, Next.js, React Native, TypeScript, Node.js, and MongoDB. Seeking full-time opportunities to build high-impact solutions.',
-                  );
-                  setIsEditingSummary(false);
-                }}
-                variant='outline'
-                size='sm'
-                className='flex items-center gap-1 text-xs h-6'
-              >
-                <X className='w-3 h-3' />
-                Cancel
-              </Button>
-            </div>
-          ) : (
-            <Button
-              onClick={() => setIsEditingSummary(true)}
-              variant='outline'
-              size='sm'
-              className='flex items-center gap-2 print:hidden text-xs h-6 mb-2'
-            >
-              <Edit3 className='w-3 h-3' />
-              Edit
-            </Button>
-          )}
-          {isEditingSummary ? (
-            <Textarea
-              value={professionalSummary}
-              onChange={(e) => setProfessionalSummary(e.target.value)}
-              className='min-h-[80px] text-sm leading-relaxed border-black print:hidden'
-              placeholder='Enter your professional summary...'
-              style={{
-                fontFamily: 'Arial, Calibri, sans-serif',
-                fontSize: '11px',
-              }}
-            />
-          ) : (
-            <p style={{ fontSize: '11px', margin: '0', lineHeight: '1.5' }}>
-              {professionalSummary}
-            </p>
-          )}
-        </section>
 
         {/* PROFESSIONAL EXPERIENCE - Action Verbs + Quantified Results */}
         <section className='mb-5 print:mb-3'>
