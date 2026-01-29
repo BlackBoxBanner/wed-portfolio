@@ -7,7 +7,7 @@ export const experienceSOPet: ExperienceType = {
   title: 'Full-Stack Developer',
   current: true,
   fromMonth: 'January',
-  fromYear: 2024,
+  fromYear: 2025,
   type: 'Contract',
   description:
     'Led the development of a comprehensive multi-vendor e-commerce platform, creating both mobile and web applications with complex vendor management workflows, payment integration, and scalable architecture.',
