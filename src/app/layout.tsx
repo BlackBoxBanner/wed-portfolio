@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
-import { Outfit as FontSans } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Menu from '@/components/menu';
 import Footer from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { generateMetadata, generateStructuredData } from '@/lib/metadata';
-import FloatingSpores from '@/components/floating-spores';
 
-const fontSans = FontSans({
+const fontSans = Inter({
   subsets: ['latin'],
-  weight: ['300'],
   variable: '--font-sans',
+});
+
+const fontMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
 });
 
 export const metadata: Metadata = generateMetadata();
@@ -36,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
+        {/* Globally inlined JSON-LD: Person + WebSite (see generateStructuredData). */}
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -45,11 +49,11 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased text-lg relative',
+          'min-h-screen bg-folio-bg font-sans antialiased text-[15px] text-folio-fg leading-relaxed',
           fontSans.variable,
+          fontMono.variable,
         )}
       >
-        <FloatingSpores />
         <Toaster />
         <Menu />
         {children}

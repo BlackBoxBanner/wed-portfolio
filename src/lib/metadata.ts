@@ -1,41 +1,28 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+
+/** Stable origin for absolute URLs (no trailing slash). */
+export function siteOrigin(): string {
+  return (
+    process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app'
+  ).replace(/\/+$/, '');
+}
 
 export const siteConfig = {
   name: 'Sueksit Vachirakumthorn',
   title: 'Sueksit Vachirakumthorn | Full-Stack Developer',
   description:
     'Full-Stack Developer passionate about building web and mobile applications that solve real-world problems. Specializing in React, Next.js, React Native, and modern web technologies.',
-  url: process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app/',
   ogImage: '/og-image.jpg',
   keywords: [
     'Sueksit Vachirakumthorn',
-    'Sueksit',
-    'Vachirakumthorn',
     'Full-Stack Developer',
-    'React Developer',
-    'Next.js Developer',
-    'React Native Developer',
-    'TypeScript Developer',
-    'JavaScript Developer',
-    'Web Developer',
-    'Mobile App Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Software Engineer',
-    'Thai Developer',
+    'Next.js',
+    'React',
+    'TypeScript',
+    'React Native',
     'Portfolio',
-    'Sueksit Vachirakumthorn Portfolio',
-    'Web Development Portfolio',
-    'Software Developer Portfolio',
-    'Thailand Developer',
-    'Bangkok Developer',
-    'Freelance Developer',
-    'Remote Developer',
-    'Tech Professional',
-    'Programmer',
-    'Software Development',
-    'Web Design',
-    'UI/UX Developer',
+    'Bangkok',
+    'Thailand',
   ],
   author: {
     name: 'Sueksit Vachirakumthorn',
@@ -51,7 +38,7 @@ export function generateMetadata({
   title = siteConfig.title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
-  url = siteConfig.url,
+  url = `${siteOrigin()}/`,
   noIndex = false,
 }: {
   title?: string;
@@ -60,15 +47,14 @@ export function generateMetadata({
   url?: string;
   noIndex?: boolean;
 } = {}): Metadata {
-  const ogImage = image.startsWith('http')
-    ? image
-    : `${siteConfig.url}${image}`;
+  const origin = siteOrigin();
+  const ogImage = image.startsWith('http') ? image : `${origin}${image}`;
 
   return {
     title,
     description,
     keywords: siteConfig.keywords,
-    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+    authors: [{ name: siteConfig.author.name, url: `${origin}/` }],
     creator: siteConfig.creator,
     publisher: siteConfig.publisher,
     robots: {
@@ -103,6 +89,7 @@ export function generateMetadata({
       title,
       description,
       images: [ogImage],
+      creator: '@sueksitv',
     },
     icons: {
       icon: [
@@ -118,7 +105,7 @@ export function generateMetadata({
       ],
     },
     manifest: '/site.webmanifest',
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: new URL(`${origin}/`),
     alternates: {
       canonical: url,
     },
@@ -136,14 +123,18 @@ export function generateMetadata({
   };
 }
 
+/** Person + WebSite JSON-LD for homepage rich results. */
 export function generateStructuredData() {
+  const origin = siteOrigin();
+  const siteUrl = `${origin}/`;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: siteConfig.author.name,
     alternateName: ['Sueksit', 'Vachirakumthorn'],
-    url: siteConfig.url,
-    image: `${siteConfig.url}/avatar.jpg`,
+    url: siteUrl,
+    image: `${origin}/avatar.jpg`,
     description: siteConfig.description,
     jobTitle: 'Full-Stack Developer',
     hasOccupation: {
@@ -176,28 +167,20 @@ export function generateStructuredData() {
       'Next.js',
       'React Native',
       'TypeScript',
-      'JavaScript',
       'Node.js',
       'Full-Stack Development',
-      'Mobile App Development',
       'Web Development',
-      'Frontend Development',
-      'Backend Development',
-      'Software Engineering',
-      'UI/UX Development',
-      'Database Management',
-      'API Development',
     ],
     subjectOf: {
       '@type': 'WebSite',
-      '@id': siteConfig.url,
+      '@id': siteUrl,
       name: siteConfig.name,
       description: siteConfig.description,
     },
-    '@id': siteConfig.url,
+    '@id': siteUrl,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': siteConfig.url,
+      '@id': siteUrl,
     },
   };
 }

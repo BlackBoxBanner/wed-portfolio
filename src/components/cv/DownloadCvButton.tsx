@@ -14,7 +14,10 @@ export default function DownloadCvButton({ filename }: Props) {
   return (
     <PDFDownloadLink document={<CVDocument />} fileName={name}>
       {({ loading }) => (
-        <Button variant='outline' className='flex items-center gap-2'>
+        <Button
+          variant='outline'
+          className='flex items-center gap-2 border-folio-border text-folio-fg hover:bg-folio-surface hover:text-folio-fg'
+        >
           {loading ? 'Preparing PDF…' : 'Download PDF'}
         </Button>
       )}

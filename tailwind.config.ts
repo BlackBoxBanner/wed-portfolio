@@ -22,8 +22,18 @@ const config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
       },
       colors: {
+        folio: {
+          bg: 'oklch(99% 0.002 240)',
+          surface: 'oklch(100% 0 0)',
+          fg: 'oklch(18% 0.012 250)',
+          muted: 'oklch(54% 0.012 250)',
+          border: 'oklch(92% 0.005 250)',
+          brand: 'oklch(58% 0.18 255)',
+          success: 'oklch(60% 0.12 145)',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

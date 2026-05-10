@@ -1,57 +1,36 @@
-import { MetadataRoute } from 'next';
-import { siteConfig } from '@/lib/metadata';
+import type { MetadataRoute } from 'next';
+import { siteOrigin } from '@/lib/metadata';
 import { getAllBlogPosts } from '@/lib/blog/utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = siteOrigin();
+  const lastMod = new Date();
   const blogPosts = getAllBlogPosts();
 
-  const staticPages = [
+  // Omit hash-only URLs — crawlers dedupe them to "/" and clutter the sitemap.
+  const staticPages: MetadataRoute.Sitemap = [
     {
-      url: siteConfig.url,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      url: `${base}/`,
+      lastModified: lastMod,
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${siteConfig.url}/#about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${siteConfig.url}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${siteConfig.url}/#projects`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      url: `${base}/blog`,
+      lastModified: lastMod,
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${siteConfig.url}/#experience`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      url: `${base}/cv`,
+      lastModified: lastMod,
+      changeFrequency: 'monthly',
       priority: 0.8,
-    },
-    {
-      url: `${siteConfig.url}/#education`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${siteConfig.url}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
     },
   ];
 
   const blogPages = blogPosts.map((post) => ({
-    url: `${siteConfig.url}/blog/${post.slug}`,
+    url: `${base}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,

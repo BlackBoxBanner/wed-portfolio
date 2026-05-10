@@ -70,22 +70,6 @@ export function getBlogPost(slug: string): BlogPost | null {
   }
 }
 
-export function getBlogPostsByTag(tag: string): BlogPost[] {
-  const allPosts = getAllBlogPosts();
-  return allPosts.filter((post) => post.tags?.includes(tag));
-}
-
-export function getAllTags(): string[] {
-  const allPosts = getAllBlogPosts();
-  const tags = new Set<string>();
-
-  allPosts.forEach((post) => {
-    post.tags?.forEach((tag) => tags.add(tag));
-  });
-
-  return Array.from(tags).sort();
-}
-
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',

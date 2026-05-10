@@ -123,6 +123,43 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-foreground/50;
   }
+
+  /* Blog / MDX — matches body (15px), folio palette, and section heading rhythm */
+  .prose-folio {
+    @apply prose max-w-none text-[15px] leading-relaxed text-folio-fg;
+    @apply prose-headings:font-semibold prose-headings:text-folio-fg;
+    @apply prose-h1:text-[clamp(1.375rem,3vw,1.75rem)] prose-h1:tracking-[-0.03em] prose-h1:font-semibold prose-h1:mt-10 prose-h1:mb-4;
+    @apply prose-h2:text-xl prose-h2:sm:text-[1.375rem] prose-h2:tracking-[-0.02em] prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-28;
+    @apply prose-h3:text-[1.0625rem] prose-h3:tracking-tight prose-h3:mt-8 prose-h3:mb-3 prose-h3:scroll-mt-28;
+    @apply prose-h4:text-[15px] prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2;
+    @apply prose-p:text-folio-muted prose-p:leading-relaxed prose-p:mb-4;
+    @apply prose-li:text-folio-muted prose-li:leading-relaxed prose-li:my-1;
+    @apply prose-ul:my-4 prose-ol:my-4 prose-ul:pl-5 prose-ol:pl-5;
+    @apply prose-strong:text-folio-fg prose-strong:font-semibold;
+    @apply prose-a:text-folio-brand prose-a:font-medium prose-a:no-underline hover:prose-a:underline;
+    @apply prose-blockquote:border-l-2 prose-blockquote:border-folio-border prose-blockquote:pl-4 prose-blockquote:text-folio-muted prose-blockquote:not-italic prose-blockquote:my-4;
+    @apply prose-code:rounded prose-code:border prose-code:border-folio-border prose-code:bg-folio-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-mono prose-code:text-folio-fg prose-code:before:content-none prose-code:after:content-none;
+    @apply prose-pre:rounded-md prose-pre:text-[13px] prose-pre:leading-relaxed prose-pre:font-mono prose-pre:border prose-pre:border-[#30363d] prose-pre:bg-[#0d1117] prose-pre:text-[#e6edf3] prose-pre:shadow-inner;
+    @apply prose-hr:border-folio-border prose-hr:my-10;
+    @apply prose-img:rounded-md prose-img:border prose-img:border-folio-border;
+    @apply prose-figcaption:text-[13px] prose-figcaption:text-folio-muted prose-figcaption:mt-2;
+    @apply prose-table:text-[15px] prose-table:border prose-table:border-folio-border prose-table:rounded-md prose-table:overflow-hidden;
+    @apply prose-thead:border-b prose-thead:border-folio-border prose-th:bg-folio-surface prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-th:text-folio-fg;
+    @apply prose-td:border-t prose-td:border-folio-border prose-td:px-3 prose-td:py-2 prose-td:text-folio-muted;
+  }
+
+  .prose-folio > :first-child:is(h1, h2, h3, h4) {
+    @apply mt-0;
+  }
+
+  .prose-folio pre code {
+    @apply border-0 bg-transparent p-0 text-inherit;
+  }
+
+  /* Let panel bg show through; hljs theme supplies token colors */
+  .prose-folio pre code.hljs {
+    background-color: transparent !important;
+  }
 }
 
 /* ============================================

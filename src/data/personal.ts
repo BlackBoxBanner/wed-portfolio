@@ -1,4 +1,4 @@
-import { siteConfig } from '@/lib/metadata';
+import { siteConfig, siteOrigin } from '@/lib/metadata';
 import type { PersonalInfo } from './types';
 
 export const personalInfo: PersonalInfo = {
@@ -10,7 +10,7 @@ export const personalInfo: PersonalInfo = {
   email: siteConfig.author.email,
   phone: '+66 97 949 5351',
   location: 'Bangkok, Thailand',
-  website: siteConfig.url,
+  website: `${siteOrigin()}/`,
   github: `https://github.com/${siteConfig.author.github}`,
   linkedin: `https://linkedin.com/in/${siteConfig.author.linkedin}`,
   whoIAm: [

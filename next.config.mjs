@@ -11,7 +11,7 @@ const nextConfig = {
 
   // Performance optimizations
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react'],
   },
 
   // Production optimizations
@@ -66,10 +66,9 @@ const nextConfig = {
     ];
   },
 
-  // Environment variables
   env: {
     NEXT_PUBLIC_APP_URL:
-      process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app/',
+      process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app',
   },
 };
 

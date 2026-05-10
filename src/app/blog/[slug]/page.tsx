@@ -7,6 +7,9 @@ import remarkFrontmatter from 'remark-frontmatter';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeSlug from 'rehype-slug';
 import 'highlight.js/styles/github-dark.css';
+import { FolioBreadcrumb, FolioPageShell } from '@/components/folio-layout';
+import { MdxAnchor } from '@/components/mdx-anchor';
+import { siteOrigin } from '@/lib/metadata';
 
 export const viewport = {
   width: 'device-width',
@@ -38,18 +41,19 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
-  const postUrl = `${baseUrl}/blog/${post.slug}`;
+  const base = siteOrigin();
+  const postUrl = `${base}/blog/${post.slug}`;
   const ogImageUrl = post.ogImage
-    ? `${baseUrl}${post.ogImage}`
-    : `${baseUrl}/blog/${post.slug}/opengraph-image`;
+    ? `${base}${post.ogImage}`
+    : `${base}/blog/${post.slug}/opengraph-image`;
 
   return {
     title: `${post.title} | Sueksit Vachirakumthorn`,
     description: post.description,
-    keywords: post.tags?.join(', '),
-    authors: [{ name: post.author || 'Sueksit Vachirakumthorn', url: baseUrl }],
+    ...(post.tags?.length ? { keywords: post.tags } : {}),
+    authors: [
+      { name: post.author || 'Sueksit Vachirakumthorn', url: `${base}/` },
+    ],
     creator: post.author || 'Sueksit Vachirakumthorn',
     publisher: 'Sueksit Vachirakumthorn',
 
@@ -96,15 +100,8 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       },
     },
 
-    // Additional SEO metadata
     applicationName: 'Sueksit Vachirakumthorn Portfolio',
     referrer: 'origin-when-cross-origin',
-    verification: {
-      // Add your verification codes here if you have them
-      // google: 'your-google-verification-code',
-      // yandex: 'your-yandex-verification-code',
-      // yahoo: 'your-yahoo-verification-code',
-    },
     category: 'Technology',
     classification: 'Blog Post',
   };
@@ -117,14 +114,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL || 'https://sueksit.vercel.app';
-  const postUrl = `${baseUrl}/blog/${post.slug}`;
+  const base = siteOrigin();
+  const postUrl = `${base}/blog/${post.slug}`;
   const ogImageUrl = post.ogImage
-    ? `${baseUrl}${post.ogImage}`
-    : `${baseUrl}/blog/${post.slug}/opengraph-image`;
+    ? `${base}${post.ogImage}`
+    : `${base}/blog/${post.slug}/opengraph-image`;
 
-  // Structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -133,7 +128,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     author: {
       '@type': 'Person',
       name: post.author || 'Sueksit Vachirakumthorn',
-      url: baseUrl,
+      url: `${base}/`,
       jobTitle: 'Full-Stack Developer',
       worksFor: {
         '@type': 'Organization',
@@ -147,7 +142,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     publisher: {
       '@type': 'Person',
       name: 'Sueksit Vachirakumthorn',
-      url: baseUrl,
+      url: `${base}/`,
       jobTitle: 'Full-Stack Developer',
     },
     datePublished: post.date,
@@ -177,117 +172,103 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <div className='container mx-auto px-4 py-16'>
-        <div className='max-w-4xl mx-auto'>
-          {/* Breadcrumb navigation for SEO */}
-          <nav aria-label='Breadcrumb' className='mb-8'>
-            <ol className='flex items-center space-x-2 text-sm text-muted-foreground'>
-              <li>
-                <Link href='/' className='hover:text-primary transition-colors'>
-                  Home
-                </Link>
-              </li>
-              <li>/</li>
-              <li>
-                <Link
-                  href='/blog'
-                  className='hover:text-primary transition-colors'
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>/</li>
-              <li className='text-foreground' aria-current='page'>
-                {post.title}
-              </li>
-            </ol>
-          </nav>
-          {/* Back to blog link */}
-          <Link
-            href='/blog'
-            className='inline-flex items-center text-primary hover:underline mb-8'
-          >
-            ← Back to blog
-          </Link>
+      <FolioPageShell>
+        <FolioBreadcrumb
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Blog', href: '/blog' },
+            { label: post.title },
+          ]}
+        />
 
-          {/* Article header with semantic markup */}
-          <header className='mb-8'>
-            <div className='flex items-center justify-between mb-4'>
-              <time
-                className='text-sm text-muted-foreground'
-                dateTime={post.date}
-              >
+        <Link
+          href='/blog'
+          className='inline-flex text-sm font-medium text-folio-brand hover:opacity-80 transition-opacity mb-10'
+        >
+          ← Back to blog
+        </Link>
+
+        <header className='mb-10 pb-10 border-b border-folio-border'>
+          <div className='flex flex-wrap items-center justify-between gap-3 mb-4'>
+            <time
+              className='font-mono text-[11px] text-folio-muted tabular-nums'
+              dateTime={post.date}
+            >
+              {formatDate(post.date)}
+            </time>
+            {post.tags && post.tags.length > 0 ? (
+              <div className='flex flex-wrap gap-1.5'>
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className='font-mono text-[10px] uppercase tracking-[0.08em] text-folio-brand border border-folio-border px-2 py-0.5 rounded-[3px]'
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <h1 className='text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-[-0.03em] text-folio-fg mb-4'>
+            {post.title}
+          </h1>
+
+          <p className='text-[15px] text-folio-muted leading-relaxed mb-4 max-w-3xl'>
+            {post.description}
+          </p>
+
+          {post.author ? (
+            <address className='text-[13px] text-folio-muted not-italic'>
+              By{' '}
+              <span className='text-folio-fg font-medium'>{post.author}</span>
+            </address>
+          ) : null}
+        </header>
+
+        <article
+          className='prose-folio max-w-none'
+          itemScope
+          itemType='https://schema.org/BlogPosting'
+        >
+          <MDXRemote
+            source={post.content}
+            components={{ a: MdxAnchor }}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm, remarkFrontmatter],
+                rehypePlugins: [rehypeHighlight, rehypeSlug],
+              },
+            }}
+          />
+        </article>
+
+        <footer className='mt-14 pt-8 border-t border-folio-border'>
+          <div className='flex flex-wrap items-start justify-between gap-6'>
+            <div className='flex items-center gap-2 text-[13px] text-folio-muted'>
+              <span>Published</span>
+              <time className='font-mono tabular-nums' dateTime={post.date}>
                 {formatDate(post.date)}
               </time>
-              {post.tags && post.tags.length > 0 && (
-                <div className='flex flex-wrap gap-2'>
+            </div>
+            {post.tags && post.tags.length > 0 ? (
+              <div className='flex flex-wrap items-center gap-2'>
+                <span className='text-[13px] text-folio-muted'>Tags</span>
+                <div className='flex flex-wrap gap-1.5'>
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className='inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary/10 text-primary'
+                      className='font-mono text-[10px] uppercase tracking-[0.06em] border border-folio-border px-2 py-1 rounded-[3px] text-folio-muted'
                     >
                       #{tag}
                     </span>
                   ))}
                 </div>
-              )}
-            </div>
-
-            <h1 className='text-4xl font-bold text-foreground mb-4'>
-              {post.title}
-            </h1>
-
-            <p className='text-xl text-muted-foreground mb-4'>
-              {post.description}
-            </p>
-
-            {post.author && (
-              <address className='text-muted-foreground not-italic'>
-                By <span className='font-medium'>{post.author}</span>
-              </address>
-            )}
-          </header>
-
-          {/* Divider */}
-          <hr className='my-8' />
-
-          {/* Article content */}
-          <article className='prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-muted'>
-            <MDXRemote
-              source={post.content}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkGfm, remarkFrontmatter],
-                  rehypePlugins: [rehypeHighlight, rehypeSlug],
-                },
-              }}
-            />
-          </article>
-
-          {/* Article footer */}
-          <footer className='mt-12 pt-8 border-t border-border'>
-            <div className='flex flex-wrap items-center justify-between gap-4'>
-              <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-                <span>Published on</span>
-                <time dateTime={post.date}>{formatDate(post.date)}</time>
               </div>
-              {post.tags && post.tags.length > 0 && (
-                <div className='flex flex-wrap gap-2'>
-                  <span className='text-sm text-muted-foreground'>Tags:</span>
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className='inline-flex items-center px-2 py-1 rounded text-xs bg-muted text-muted-foreground'
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </footer>
-        </div>
-      </div>
+            ) : null}
+          </div>
+        </footer>
+      </FolioPageShell>
     </>
   );
 }

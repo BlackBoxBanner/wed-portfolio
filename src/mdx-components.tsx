@@ -1,58 +1,64 @@
-import type { ComponentPropsWithoutRef } from 'react';
 import type { MDXComponents } from 'mdx/types';
-import Image from 'next/image';
-import Link from 'next/link';
+import { MdxAnchor } from '@/components/mdx-anchor';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Custom components
-    a: (props: ComponentPropsWithoutRef<'a'>) => {
-      const { href, children, ...rest } = props;
-      if (href?.toString().startsWith('/')) {
-        return (
-          <Link href={href as string} {...(rest as any)}>
-            {children}
-          </Link>
-        );
-      }
-      return (
-        <a href={href} target='_blank' rel='noopener noreferrer' {...rest}>
-          {children}
-        </a>
-      );
-    },
-    // Typography components with Tailwind classes
-    h1: (props: any) => (
-      <h1 className='text-4xl font-bold mb-6 text-foreground' {...props} />
+    a: MdxAnchor,
+    h1: (props: object) => (
+      <h1
+        className='text-[clamp(1.375rem,3vw,1.75rem)] font-semibold mb-4 mt-10 first:mt-0 text-folio-fg tracking-[-0.03em] scroll-mt-28'
+        {...props}
+      />
     ),
-    h2: (props: any) => (
-      <h2 className='text-3xl font-semibold mb-4 text-foreground' {...props} />
+    h2: (props: object) => (
+      <h2
+        className='text-xl sm:text-[1.375rem] font-semibold mb-4 mt-10 first:mt-0 text-folio-fg tracking-[-0.02em] scroll-mt-28'
+        {...props}
+      />
     ),
-    h3: (props: any) => (
-      <h3 className='text-2xl font-semibold mb-3 text-foreground' {...props} />
+    h3: (props: object) => (
+      <h3
+        className='text-[1.0625rem] font-semibold mb-3 mt-8 first:mt-0 text-folio-fg tracking-tight scroll-mt-28'
+        {...props}
+      />
     ),
-    p: (props: any) => (
-      <p className='mb-4 text-muted-foreground leading-7' {...props} />
+    p: (props: object) => (
+      <p
+        className='mb-4 text-[15px] text-folio-muted leading-relaxed'
+        {...props}
+      />
     ),
-    ul: (props: any) => <ul className='mb-4 ml-6 list-disc' {...props} />,
-    ol: (props: any) => <ol className='mb-4 ml-6 list-decimal' {...props} />,
-    li: (props: any) => <li className='mb-1' {...props} />,
-    blockquote: (props: any) => (
+    ul: (props: object) => (
+      <ul className='mb-4 ml-5 list-disc marker:text-folio-muted' {...props} />
+    ),
+    ol: (props: object) => (
+      <ol
+        className='mb-4 ml-5 list-decimal marker:text-folio-muted'
+        {...props}
+      />
+    ),
+    li: (props: object) => <li className='mb-1 pl-1' {...props} />,
+    blockquote: (props: object) => (
       <blockquote
-        className='border-l-4 border-primary pl-4 italic text-muted-foreground mb-4'
+        className='border-l-2 border-folio-border pl-4 text-folio-muted mb-4 not-italic'
         {...props}
       />
     ),
-    code: (props: any) => (
-      <code className='bg-muted px-1 py-0.5 rounded text-sm' {...props} />
+    code: (props: object) => (
+      <code
+        className='font-mono text-[0.9em] bg-folio-surface border border-folio-border rounded px-1.5 py-0.5 text-folio-fg'
+        {...props}
+      />
     ),
-    pre: (props: any) => (
+    pre: (props: object) => (
       <pre
-        className='bg-muted p-4 rounded-lg overflow-x-auto mb-4'
+        className='bg-[#0d1117] border border-[#30363d] text-[#e6edf3] p-4 rounded-md overflow-x-auto mb-4 text-[13px] leading-relaxed font-mono shadow-inner'
         {...props}
       />
     ),
-    hr: (props: any) => <hr className='my-8 border-border' {...props} />,
+    hr: (props: object) => (
+      <hr className='my-10 border-folio-border' {...props} />
+    ),
     ...components,
   };
 }

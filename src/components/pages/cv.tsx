@@ -1,5 +1,11 @@
 import dynamic from 'next/dynamic';
 import Loading from '@/app/loading';
+import {
+  FolioBreadcrumb,
+  FolioPageShell,
+  FolioPageTitle,
+} from '@/components/folio-layout';
+
 const CvPdfPreview = dynamic(
   () => import('../cv/CvPdfPreview').then((mod) => mod.default),
   { ssr: false, loading: () => <Loading /> },
@@ -11,15 +17,23 @@ const DownloadCvButton = dynamic(
 
 const CVPage = () => {
   return (
-    <>
-      {/* Print/Download Controls */}
-      <div className='flex justify-center gap-4 mb-4 bg-white print:hidden pt-16'>
+    <FolioPageShell className='pb-12'>
+      <FolioBreadcrumb
+        items={[{ label: 'Home', href: '/' }, { label: 'CV' }]}
+      />
+
+      <FolioPageTitle
+        eyebrow='Resume'
+        title='Curriculum Vitae'
+        description='Preview and download a PDF copy for applications and recruiters.'
+      />
+
+      <div className='flex justify-start sm:justify-end mb-8 print:hidden'>
         <DownloadCvButton />
       </div>
 
-      {/* React-PDF Preview */}
       <CvPdfPreview />
-    </>
+    </FolioPageShell>
   );
 };
 

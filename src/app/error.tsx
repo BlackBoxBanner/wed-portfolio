@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 
 export default function Error({
   error,
@@ -11,61 +10,71 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error('Portfolio Error:', error);
   }, [error]);
 
-  return (
-    <div className='min-h-screen flex items-center justify-center bg-background px-4'>
-      <div className='text-center max-w-md mx-auto'>
-        <div className='mb-6'>
-          <div className='mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4'>
-            <svg
-              className='w-8 h-8 text-red-600'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-1.964-.833-2.732 0l-5.898 6.5c-.77.833.192 2.5 1.732 2.5z'
-              />
-            </svg>
-          </div>
-          <h2 className='text-2xl font-bold text-foreground mb-2'>
-            Something went wrong
-          </h2>
-          <p className='text-muted-foreground mb-6'>
-            We apologize for the inconvenience. An unexpected error has occurred
-            while loading the portfolio.
-          </p>
-        </div>
+  const primaryBtn =
+    'inline-flex w-full sm:w-auto justify-center items-center px-[22px] py-[11px] text-sm font-medium text-folio-bg bg-folio-fg rounded-md hover:opacity-[0.82] transition-opacity';
+  const outlineBtn =
+    'inline-flex w-full sm:w-auto justify-center items-center px-[22px] py-[11px] text-sm font-medium text-folio-fg bg-transparent border border-folio-border rounded-md hover:border-folio-muted transition-colors';
 
-        <div className='space-y-3'>
-          <Button onClick={reset} className='w-full'>
+  return (
+    <div className='min-h-[calc(100vh-3.5rem)] flex items-center justify-center px-6 pt-20 pb-16'>
+      <div className='text-center max-w-md mx-auto w-full'>
+        <p className='font-mono text-[11px] uppercase tracking-[0.12em] text-folio-brand mb-6'>
+          Something went wrong
+        </p>
+        <div
+          className='mx-auto w-12 h-12 rounded-full border border-folio-border flex items-center justify-center mb-5 text-folio-brand'
+          aria-hidden
+        >
+          <svg
+            className='w-6 h-6'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-1.964-.833-2.732 0l-5.898 6.5c-.77.833.192 2.5 1.732 2.5z'
+            />
+          </svg>
+        </div>
+        <h2 className='text-xl font-semibold text-folio-fg mb-2 tracking-tight'>
+          Unexpected error
+        </h2>
+        <p className='text-[15px] text-folio-muted mb-8 leading-relaxed'>
+          An error occurred while loading this page. You can try again or return
+          home.
+        </p>
+
+        <div className='flex flex-col sm:flex-row gap-3 justify-center'>
+          <button type='button' onClick={reset} className={primaryBtn}>
             Try again
-          </Button>
-          <Button
-            variant='outline'
-            onClick={() => (window.location.href = '/')}
-            className='w-full'
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              window.location.href = '/';
+            }}
+            className={outlineBtn}
           >
             Go to homepage
-          </Button>
+          </button>
         </div>
 
-        {process.env.NODE_ENV === 'development' && (
-          <details className='mt-6 text-left'>
-            <summary className='text-sm text-muted-foreground cursor-pointer hover:text-foreground'>
+        {process.env.NODE_ENV === 'development' ? (
+          <details className='mt-10 text-left'>
+            <summary className='text-[13px] text-folio-muted cursor-pointer hover:text-folio-fg'>
               Error details (development)
             </summary>
-            <pre className='mt-2 text-xs bg-gray-100 p-3 rounded overflow-auto text-red-600'>
+            <pre className='mt-3 text-xs font-mono bg-folio-surface border border-folio-border p-3 rounded-md overflow-auto text-folio-brand whitespace-pre-wrap'>
               {error.message}
             </pre>
           </details>
-        )}
+        ) : null}
       </div>
     </div>
   );
