@@ -83,7 +83,7 @@ const MenuBar = () => {
       {open ? (
         <div
           id='mobile-nav'
-          className='absolute top-14 left-0 right-0 sm:hidden border-b border-folio-border bg-folio-bg/95 backdrop-blur-md py-4 px-6 flex flex-col gap-3 shadow-sm'
+          className='absolute top-14 left-0 right-0 sm:hidden border-b border-folio-border bg-folio-bg backdrop-blur-md py-4 px-6 flex flex-col gap-3 shadow-sm'
         >
           {NAV.map((item) => (
             <Link
