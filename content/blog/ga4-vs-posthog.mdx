@@ -1,0 +1,462 @@
+---
+title: 'GA4 vs PostHog: Which Analytics Platform Should You Choose?'
+date: '2026-06-19'
+description:
+  "A practical comparison of Google Analytics 4 and PostHog from a product
+  engineer's perspective, helping you choose the right analytics tool for your
+  needs."
+tags: ['analytics', 'product', 'tools']
+ogImage: '/og-image.jpg'
+---
+
+# GA4 vs PostHog: Which Analytics Platform Should You Choose?
+
+After working with both Google Analytics 4 and PostHog across different
+projects, I've learned that choosing an analytics platform isn't just about
+features—it's about understanding what questions you're trying to answer and who
+will be asking them.
+
+GA4 and PostHog represent two fundamentally different philosophies. GA4 is
+Google's enterprise-grade platform built for marketers tracking acquisition and
+campaigns. PostHog is an open-source, developer-first toolkit built for product
+teams who need to understand _how_ users interact with their product, not just
+_where_ they came from.
+
+Here's what I've learned using both, and how to decide which one fits your
+needs.
+
+## The Core Difference
+
+Before diving into features, understand this: **GA4 is built for marketing
+teams; PostHog is built for product teams.**
+
+**GA4** excels at answering questions like:
+
+- Which ad campaign drives the most conversions?
+- What's my traffic from organic search vs paid ads?
+- How do users flow through my marketing funnel?
+
+**PostHog** excels at answering questions like:
+
+- Why did users abandon the checkout flow at step 3?
+- How are users actually using this new feature?
+- Which cohort has the best retention after 30 days?
+
+Both _can_ answer each other's questions, but they're optimized for different
+use cases. This distinction matters more than any feature comparison.
+
+## What Each Platform Actually Offers
+
+### GA4: The Marketing Powerhouse
+
+**What you get:**
+
+- Automatic pageview and event tracking out of the box
+- Deep integration with Google Ads, Search Console, and BigQuery
+- Machine learning insights for predicting user behavior
+- Free tier that handles up to 10 million events/month
+- Cross-platform tracking (web + mobile apps)
+
+**What you don't get:**
+
+- No session replay to watch how users interact with your UI
+- No feature flags for gradual rollouts
+- Limited funnel analysis compared to dedicated product analytics tools
+- No direct SQL access to your raw data (BigQuery export exists but adds
+  complexity)
+
+### PostHog: The Product Engineer's Toolkit
+
+**What you get:**
+
+- Everything in one place: analytics, session replay, feature flags, A/B
+  testing, and surveys
+- Full SQL access to query your data any way you want
+- Self-hosting option for complete data ownership
+- Autocapture that tracks every click, pageview, and form submission
+  automatically
+- Developer-friendly SDKs in every major language
+- Built-in reverse proxy to bypass ad blockers
+
+**What you don't get:**
+
+- Google Ads attribution (you'll need to build this yourself)
+- The same level of marketing attribution modeling GA4 provides
+- Massive scale on the free tier (1M events vs GA4's 10M)
+
+## The Features That Actually Matter
+
+Here's what I care about when choosing analytics:
+
+### Event Tracking & Custom Properties
+
+**GA4** limits you to 25 custom user properties and 50 custom event parameters.
+For most marketing use cases, this is plenty.
+
+**PostHog** has no limits. Track whatever you want, however you want. As a
+developer, this matters when you're iterating fast and need flexibility.
+
+### Funnels & Retention
+
+Both handle funnels, but PostHog's funnel analysis is significantly more
+powerful. You can break down funnels by any property, compare cohorts, and dive
+deep into where users drop off. GA4's funnels work, but they feel basic once
+you've used PostHog's.
+
+### Session Replay
+
+This is a game-changer for debugging UX issues. PostHog includes privacy-aware
+session replay that automatically masks sensitive inputs. Watching a user
+struggle with your checkout flow tells you more than any funnel chart ever
+could.
+
+GA4 doesn't have this. You'd need to add Hotjar, FullStory, or LogRocket
+separately.
+
+### Feature Flags & A/B Testing
+
+PostHog's built-in feature flags let you roll out features gradually, do
+multivariate testing, and control who sees what—all in the same tool where
+you're measuring impact.
+
+GA4 used to integrate with Google Optimize, but Google shut it down in 2023. Now
+you need a separate tool like Optimizely or VWO.
+
+### Data Ownership
+
+With **GA4**, your data lives on Google's servers. You can export to BigQuery,
+but that's another tool to manage.
+
+With **PostHog**, you can self-host and own every byte, or use their cloud with
+easy exports to S3, Snowflake, or your data warehouse.
+
+## What This Actually Costs
+
+### GA4: Free Until It's Not
+
+GA4's free tier is generous: **10 million events per month** for web properties.
+For most sites, that's effectively unlimited.
+
+If you outgrow the free tier, GA4 360 starts around **$50,000/year** and scales
+based on volume. That's a massive jump, but you're getting enterprise support,
+SLAs, and advanced features like roll-up reporting.
+
+**Bottom line:** Free for 99% of projects. If you need more, you're paying
+enterprise prices.
+
+### PostHog: Pay for What You Use
+
+PostHog gives you **1 million events free every month**, plus access to all
+features (session replay, feature flags, experiments).
+
+After that, it's usage-based:
+
+- **Analytics**: ~$0.31 per 1,000 events
+- **Session replay**: $0.005 per recording
+- **Feature flags**: $0.0001 per request
+
+For a project with 10 million events/month, you're looking at around
+**$2,800/month** for analytics alone. But you're also getting session replay,
+feature flags, and A/B testing—features that would cost thousands more with
+separate tools.
+
+**Bottom line:** Generous free tier for side projects and MVPs. As you scale,
+costs are predictable and linear.
+
+## When to Choose GA4
+
+Use GA4 if you're:
+
+**Running a marketing-driven business.** Your primary goal is tracking where
+traffic comes from, which campaigns convert, and how to optimize ad spend. GA4's
+integration with Google Ads is unmatched.
+
+**Already in the Google ecosystem.** If you're using Google Ads, Tag Manager,
+Search Console, and BigQuery, GA4 fits seamlessly into your workflow.
+
+**Operating at massive scale with minimal budget.** You need to track billions
+of events and can't justify spending thousands on analytics. GA4's free tier
+scales incredibly well.
+
+**Building a content site or e-commerce store.** Standard analytics questions
+(pageviews, bounce rate, conversion tracking) are what you care about, and GA4
+handles these effortlessly.
+
+**Working in a heavily regulated environment.** You want a vendor that handles
+compliance, requires zero infrastructure, and has brand recognition with
+stakeholders.
+
+### When GA4 Falls Short
+
+Don't choose GA4 if you need to:
+
+- Watch session replays to understand user behavior
+- Use feature flags to control rollouts
+- Query raw data with SQL for custom analysis
+- Own your data completely (HIPAA, GDPR, or air-gapped requirements)
+- Get fast answers to product questions without waiting for reports to process
+
+## When to Choose PostHog
+
+Use PostHog if you're:
+
+**Building a product-led SaaS business.** You need to understand feature
+adoption, retention cohorts, and user behavior at a granular level. PostHog is
+built for this.
+
+**Tired of stitching together multiple tools.** Instead of paying for
+Amplitude + LaunchDarkly + FullStory + Statsig, you get everything in one
+platform.
+
+**Working on a team that writes code.** Your PMs and engineers want SQL access,
+programmatic API control, and the ability to self-serve insights without waiting
+for analytics specialists.
+
+**Required to self-host for compliance.** HIPAA, GDPR data residency laws, or
+internal policies mean you need complete control over where data lives.
+
+**Losing 40% of your data to ad blockers.** PostHog's reverse proxy setup routes
+events through your own domain, bypassing most ad blockers.
+
+**Iterating fast on analysis.** You frequently create custom dashboards, need to
+answer ad-hoc questions quickly, and hate waiting for data to "process."
+
+### When PostHog Falls Short
+
+Don't choose PostHog if you need:
+
+- Advanced marketing attribution modeling
+- Seamless Google Ads integration
+- White-glove enterprise support with massive budgets
+- The absolute lowest cost at massive scale (10M+ events)
+
+## Real Examples from My Experience
+
+### SaaS Startup (B2B)
+
+**Context:** 50k monthly active users, product-led growth, 8-person engineering
+team.
+
+**Chose PostHog** because we needed feature flags for gradual rollouts, session
+replay to debug customer support issues, and funnels to optimize our onboarding
+flow. The PMs could write SQL to answer their own questions.
+
+**Cost:** ~$500/month vs GA4's free tier, but PostHog replaced 5 separate tools
+we were evaluating.
+
+### E-commerce Store
+
+**Context:** 500k monthly visitors, heavy Google Ads spend, dedicated marketing
+team.
+
+**Chose GA4** because Google Ads attribution was critical, the marketing team
+already knew GA, and enhanced e-commerce tracking worked out of the box. The
+scale was free, and we didn't need product analytics features.
+
+### Healthcare SaaS
+
+**Context:** HIPAA compliance required, 20k monthly active users.
+
+**Chose PostHog (self-hosted)** because we needed complete data control.
+Self-hosting on our compliant infrastructure meant no BAA required, no data
+leaving our servers, and full audit trails for regulators.
+
+### Hybrid Approach
+
+**Context:** Product company with a marketing site and SaaS app.
+
+**Chose both:** GA4 on the marketing site to track SEO and paid acquisition,
+PostHog in the app to track feature usage and retention. Best of both worlds,
+minimal overlap in what each tracks.
+
+## Getting Started: Code Examples
+
+### Setting Up GA4
+
+GA4 is straightforward—add one script tag and you're tracking pageviews
+automatically:
+
+```html
+<!-- Add to your <head> -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+
+  // Custom event tracking
+  gtag('event', 'purchase', {
+    transaction_id: 'T12345',
+    value: 25.99,
+    currency: 'USD',
+  });
+</script>
+```
+
+**The catch:** 30-40% of users with ad blockers will block this script, so
+you'll lose a significant chunk of your data.
+
+### Setting Up PostHog
+
+PostHog requires slightly more setup, but you get more control:
+
+```typescript
+// In your Next.js or React app
+import posthog from 'posthog-js';
+
+if (typeof window !== 'undefined') {
+  posthog.init('phc_XXXXXXXXXXX', {
+    api_host: 'https://app.posthog.com', // or your reverse proxy
+    autocapture: true,
+    session_recording: {
+      maskAllInputs: true,
+      maskTextSelector: '.sensitive',
+    },
+  });
+}
+
+// Track custom events
+posthog.capture('purchase_completed', {
+  transaction_id: 'T12345',
+  value: 25.99,
+  plan: 'pro',
+});
+
+// Identify users
+posthog.identify('user_123', {
+  email: 'user@example.com',
+  plan: 'pro',
+});
+
+// Check feature flags
+if (posthog.isFeatureEnabled('new-dashboard')) {
+  // Show new UI
+}
+```
+
+**The advantage:** With a reverse proxy (routes through your domain), you bypass
+most ad blockers. Plus, you get feature flags in the same SDK.
+
+### Self-Hosting PostHog
+
+If you need complete control:
+
+```bash
+# Docker Compose setup (simplified)
+version: '3'
+services:
+  posthog:
+    image: posthog/posthog:latest
+    environment:
+      SECRET_KEY: <random-key>
+      POSTGRES_HOST: postgres
+      CLICKHOUSE_HOST: clickhouse
+    depends_on:
+      - postgres
+      - clickhouse
+      - redis
+```
+
+Self-hosting means no event limits (only bounded by your hardware), complete
+data ownership, and no vendor lock-in.
+
+## Privacy & Compliance
+
+Both platforms handle privacy differently, and this matters if you're operating
+in regulated industries or serving EU users.
+
+### GA4's Approach
+
+- **GDPR-compliant** with consent mode
+- **IP anonymization** by default
+- **Data deletion** requests supported
+- Data stored on **Google's servers** (US/EU regions)
+- **Closed-source**—you can't audit what's happening under the hood
+- Requires **cookie consent banners** for EU users
+
+GA4 is compliant, but you're trusting Google's infrastructure and policies. For
+most businesses, this is perfectly fine.
+
+### PostHog's Approach
+
+- **Self-hosting option** means complete control
+- **Open-source**—audit the entire codebase yourself
+- **Privacy-aware session replay** (masks inputs by default)
+- **No cookies required** (uses localStorage and sessionStorage)
+- **GDPR/CCPA toolkit** built-in
+- **Configurable data retention**
+
+PostHog gives you more flexibility. You can track anonymously without consent,
+then upgrade to identified tracking when users opt in. If you self-host, you
+control every aspect of data storage and processing.
+
+## Performance Impact
+
+Analytics shouldn't slow down your site. Here's what each adds:
+
+**GA4:**
+
+- ~50 KB bundle (gtag.js)
+- Async loading, doesn't block rendering
+- Minimal impact for most sites
+
+**PostHog:**
+
+- ~30 KB bundle (posthog-js)
+- Async, lazy-loadable
+- Session replay adds ~50-100 KB per session (compressed)
+- Still minimal impact, even with replay enabled
+
+Both are lightweight enough that performance isn't a deciding factor.
+
+## My Recommendation
+
+Here's my decision framework:
+
+**Choose GA4 if:**
+
+- Marketing and acquisition are your primary concerns
+- You're deeply integrated with Google's ecosystem
+- You need massive scale at zero cost
+- You're running a content site or e-commerce store
+
+**Choose PostHog if:**
+
+- You're building a product and need to understand user behavior
+- You want one tool instead of five
+- Your team writes code and wants SQL access
+- You need to self-host for compliance
+- You're tired of losing data to ad blockers
+
+**Run both if:**
+
+- You have both a marketing site and a product
+- GA4 tracks top-of-funnel (SEO, ads, landing pages)
+- PostHog tracks in-app behavior and retention
+- They complement each other without overlap
+
+## The Bottom Line
+
+GA4 and PostHog aren't really competitors—they serve different teams asking
+different questions.
+
+**GA4** is the right choice for marketing teams who need to track campaigns,
+optimize ad spend, and understand acquisition funnels.
+
+**PostHog** is the right choice for product teams who need to understand how
+users actually use their product, ship features safely, and iterate fast on
+insights.
+
+The best analytics platform is the one your team will actually use to make
+better decisions. Choose based on who will use it, what questions they need
+answered, and how much control you need over your data.
+
+For my projects, I use PostHog for product analytics and feature flags, and I'll
+add GA4 if I'm running paid acquisition campaigns. That combination gives me
+everything I need without paying for tools I don't use.
