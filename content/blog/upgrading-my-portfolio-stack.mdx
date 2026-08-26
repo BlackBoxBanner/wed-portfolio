@@ -1,0 +1,345 @@
+---
+title: 'Why I Upgraded My Portfolio: Next.js 16, React 19, and Tailwind CSS 4'
+description:
+  'A practical walkthrough of upgrading a personal portfolio from Next.js 14 to
+  16, React 18 to 19, and Tailwind CSS 3 to 4 — and why keeping side projects
+  current matters more than you think.'
+date: '2026-08-27'
+author: 'Sueksit Vachirakumthorn'
+tags:
+  [
+    'Next.js',
+    'React',
+    'Tailwind CSS',
+    'TypeScript',
+    'Web Development',
+    'Portfolio',
+  ]
+ogImage: '/og-image.jpg'
+---
+
+In my last portfolio post, I wrote about taking my time — about false starts,
+perfectionism, and finally shipping something I was proud of. That version ran
+**Next.js 14**, **React 18**, and **Tailwind CSS 3**. It worked. It looked good.
+Visitors didn't care what version of React I was on.
+
+So why touch it at all?
+
+Because a portfolio isn't a museum piece. It's a living codebase — and living
+codebases either evolve or slowly rot. This upgrade wasn't about chasing hype.
+It was about security, developer experience, performance, and making future
+changes easier instead of harder.
+
+Here's what I upgraded, why it mattered, and what I learned along the way.
+
+## The Upgrade at a Glance
+
+| Layer        | Before     | After           |
+| ------------ | ---------- | --------------- |
+| Next.js      | 14.2.5     | 16.3.3          |
+| React        | 18         | 19              |
+| Tailwind CSS | 3.4        | 4.3             |
+| TypeScript   | 5.4        | 5.9             |
+| ESLint       | 8 (legacy) | 9 (flat config) |
+| Node.js      | 18+        | 20+             |
+
+That's two major framework generations and a complete styling architecture
+change — on a site that mostly shows my work and a handful of blog posts. Worth
+it? Absolutely.
+
+## Why Upgrading a Side Project Actually Matters
+
+### 1. Security and maintenance debt compound quietly
+
+Personal projects don't get CVE alerts in Slack. Nobody files urgent tickets
+when a dependency has a known vulnerability. But the risk is real — and it grows
+every month you stay on old major versions.
+
+Framework teams eventually stop backporting fixes. Ecosystem packages drop
+support for older peers. What starts as "it still builds" becomes "I can't
+install anything new without `--legacy-peer-deps` gymnastics."
+
+Upgrading proactively keeps the dependency graph healthy before you're forced
+into a panic migration under deadline pressure.
+
+### 2. Your portfolio is a signal, not just a gallery
+
+Recruiters and hiring managers rarely inspect your `package.json`. But _you_ do.
+And the way you maintain your own code says something about how you'll treat
+production systems.
+
+A portfolio on a current stack tells a quieter story:
+
+- I understand where the ecosystem is heading
+- I can navigate breaking changes without fear
+- I treat personal work with the same care as client work
+
+That's not vanity. That's professional hygiene.
+
+### 3. Developer experience pays for itself
+
+The biggest immediate win wasn't a Lighthouse score bump — it was **Turbopack**
+as the default dev server in Next.js 16. Faster cold starts and hot reloads
+sound like small things until you've been iterating on animations and layout for
+an hour straight.
+
+Better DX means you actually _use_ your portfolio. You write blog posts. You try
+new ideas. You keep it alive instead of letting it fossilize.
+
+### 4. Future features require a modern foundation
+
+React 19's improvements around server components, ref handling, and the broader
+ecosystem alignment with Next.js 16 aren't things you _need_ on day one. But
+they're things you'll want access to — without a full rewrite — when you decide
+to add interactive features, streaming, or richer client-side behavior.
+
+Upgrading now buys optionality later.
+
+## Next.js 14 → 16: More Than a Version Bump
+
+Next.js 16 brought Turbopack to the foreground, refined the App Router, and
+continued tightening the boundary between server and client code. For a
+content-heavy portfolio with MDX blog posts, a few changes stood out.
+
+### MDX plugins and Turbopack
+
+The most surprising friction point was MDX configuration. Turbopack requires
+**serializable plugin config** — package name strings, not imported functions.
+
+Before:
+
+```javascript
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+
+export default withMDX({
+  options: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeHighlight],
+  },
+})(nextConfig);
+```
+
+After:
+
+```javascript
+export default withMDX({
+  options: {
+    remarkPlugins: ['remark-gfm', 'remark-frontmatter'],
+    rehypePlugins: ['rehype-highlight', 'rehype-slug'],
+  },
+})(nextConfig);
+```
+
+Same functionality. Different contract. The lesson: when the bundler changes,
+configuration patterns change with it. Read the migration notes — don't assume
+copy-paste from the previous major version will work.
+
+### Cleaning up deprecated options
+
+`swcMinify: true` was removed from `next.config.mjs`. SWC minification is the
+default now. Small deletions like this are satisfying — less config, same
+behavior.
+
+## React 18 → 19: The Quiet Revolution
+
+React 19 didn't rewrite my portfolio overnight. There were no dramatic "before
+and after" screenshots. But moving to React 19 alongside Next.js 16 means:
+
+- Better alignment with the current React docs and community patterns
+- Improved handling of refs and form actions (useful if I add interactivity
+  later)
+- Access to the ecosystem as libraries drop React 18 peer dependency support
+
+For a mostly static site, React 19 is about **staying compatible**, not
+unlocking flashy new APIs. That's fine. Compatibility _is_ the feature when
+you're maintaining something long-term.
+
+## Tailwind CSS 3 → 4: The Biggest Structural Change
+
+If one upgrade deserved its own section, it's Tailwind v4.
+
+Tailwind 4 is a philosophical shift: **CSS-first configuration**. The old
+`tailwind.config.ts` file? Gone. The `@tailwind base/components/utilities`
+directives? Replaced. Autoprefixer as a separate PostCSS plugin? Built in.
+
+### The new entry point
+
+```css
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+```
+
+Everything lives in `globals.css` now. Design tokens, custom utilities, theme
+variables — all co-located with the styles they affect.
+
+### Design tokens with `@theme`
+
+Instead of extending the Tailwind config in JavaScript, tokens are declared
+directly in CSS:
+
+```css
+@theme {
+  --color-folio-brand: oklch(58% 0.18 255);
+  --color-folio-muted: oklch(54% 0.012 250);
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+I moved portfolio-specific colors to OKLCH — a perceptually uniform color space
+that makes consistent palettes easier to reason about. Tailwind 4's native
+`@theme` block makes this feel natural instead of bolted-on.
+
+### Custom utilities become first-class
+
+Component patterns that lived in `@layer components` or JavaScript config now
+use `@utility`:
+
+```css
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-folio-border);
+    border-radius: 9999px;
+  }
+}
+```
+
+This is cleaner than maintaining a sprawling config file for a handful of custom
+classes.
+
+### PostCSS simplified
+
+```javascript
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+```
+
+Two plugins became one. Fewer moving parts, fewer version mismatches.
+
+### The v3 → v4 gotcha: border colors
+
+Tailwind v4 changed the default border color to `currentcolor`. Elements that
+relied on the old implicit gray border needed explicit handling. I added a
+compatibility layer in `@layer base` to preserve the previous look during
+migration — a reminder that "zero visual change" upgrades still need visual QA.
+
+## ESLint 8 → 9: Flat Config Finally
+
+The `.eslintrc.json` era is over. ESLint 9's flat config is simpler and aligns
+with how modern tooling expects configuration:
+
+```javascript
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+
+export default defineConfig([
+  ...nextCoreWebVitals,
+  globalIgnores(['.next/**', 'out/**', 'node_modules/**', 'next-env.d.ts']),
+]);
+```
+
+Lint scripts moved from `next lint` to direct `eslint .` invocation — a small
+change, but one that makes the tooling boundary clearer. ESLint is ESLint;
+Next.js is Next.js.
+
+## TypeScript 5.4 → 5.9: Stricter, Smarter
+
+TypeScript upgrades on personal projects are easy to skip. Don't.
+
+Moving to 5.9 with updated `jsx: "react-jsx"` and broader `include` paths for
+Next.js dev types caught stale assumptions in components. TypeScript isn't
+punishing you — it's documenting what your code actually does.
+
+For a portfolio, that means fewer "works on my machine" moments when you revisit
+a component six months later and wonder what you were thinking.
+
+## What I Removed (And Why That's Good Too)
+
+Upgrades aren't only about adding. I also removed:
+
+- **`react-hook-form`**, **`zod`**, and the custom form component — simplified
+  contact patterns
+- **`nodemailer`** — server-side email moved out of scope for this iteration
+- **`tailwindcss-animate`** — replaced by `tw-animate-css`, aligned with
+  Tailwind v4
+- **`tailwind.config.ts`** — no longer needed in v4's CSS-first model
+- **`autoprefixer`** — handled by Tailwind v4's PostCSS plugin
+
+Every removal reduced surface area. A portfolio doesn't need every npm package
+that seemed useful at 2 AM. Upgrades are a natural time to audit what you
+actually use.
+
+## Lessons Learned
+
+### Upgrade incrementally, but don't wait forever
+
+I didn't jump from 14 to 16 in one blind `pnpm update`. I read migration guides,
+checked breaking changes, and fixed issues as they appeared. But I also didn't
+wait until something broke in production — because for personal sites,
+"production" is whenever someone visits, and you might not notice until it's
+embarrassing.
+
+### Visual regression testing is manual but essential
+
+Automated tests won't catch "my border colors look wrong in dark mode." Scroll
+every page. Check mobile. Toggle themes. Upgrades that touch styling need eyes,
+not just green CI checks.
+
+### Document the journey
+
+This post exists partly for future-me. Six months from now, when I wonder why
+MDX plugins are strings instead of imports, I'll have an answer. Your future
+self will thank you too.
+
+### Your stack is a choice you renew, not a choice you make once
+
+The portfolio I wrote about in _Taking My Time_ was version 1.0. This is version
+2.0 — same story, better foundation. The design didn't need a revolution. The
+infrastructure did.
+
+## Why This Matters Beyond Portfolios
+
+If you maintain any long-lived project — open source, internal tools, client
+sites — the same principles apply:
+
+1. **Schedule upgrades** before they're emergencies
+2. **Read migration guides** — breaking changes are documented for a reason
+3. **Delete dead code** while you're in there
+4. **Write down what you learned** — even a short blog post helps
+
+A portfolio is the lowest-risk place to practice this discipline. If you break
+something, the only stakeholder yelling at you is you.
+
+## What's Next
+
+The stack is current. The site looks the same — which was the goal. Now I can
+focus on what actually matters: content, projects, and the occasional design
+tweak without fighting outdated tooling.
+
+Some things on the horizon:
+
+- Exploring React 19 features more deeply as use cases appear
+- Leveraging Tailwind v4's CSS variables for richer theming
+- Writing more about the things I learn while keeping this codebase alive
+
+Because maintaining a portfolio isn't about having the newest badges in your
+README. It's about proving — to yourself and anyone who looks closely — that you
+can build _and_ sustain software over time.
+
+That's a skill worth demonstrating.
+
+---
+
+_Curious about a specific part of this migration? Reach out — I'm happy to share
+more details about Tailwind v4, Next.js 16, or the art of upgrading without
+breaking everything._

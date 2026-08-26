@@ -1,8 +1,4 @@
 import withMDX from '@next/mdx';
-import remarkGfm from 'remark-gfm';
-import remarkFrontmatter from 'remark-frontmatter';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeSlug from 'rehype-slug';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,7 +11,6 @@ const nextConfig = {
   },
 
   // Production optimizations
-  swcMinify: true,
   compress: true,
 
   // Image optimization
@@ -74,7 +69,8 @@ const nextConfig = {
 
 export default withMDX({
   options: {
-    remarkPlugins: [remarkGfm, remarkFrontmatter],
-    rehypePlugins: [rehypeHighlight, rehypeSlug],
+    // Turbopack requires serializable plugin config (package names, not imports)
+    remarkPlugins: ['remark-gfm', 'remark-frontmatter'],
+    rehypePlugins: ['rehype-highlight', 'rehype-slug'],
   },
 })(nextConfig);

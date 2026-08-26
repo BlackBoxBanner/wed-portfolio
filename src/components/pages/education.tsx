@@ -49,7 +49,7 @@ const EducationCard: React.FC<{ education: EducationType }> = ({
             <ul className='space-y-2'>
               {education.achievements.map((achievement, index) => (
                 <li key={index} className='flex items-start gap-2 text-sm'>
-                  <LuDot className='w-4 h-4 text-primary flex-shrink-0' />
+                  <LuDot className='w-4 h-4 text-primary shrink-0' />
                   <span className='text-muted-foreground'>{achievement}</span>
                 </li>
               ))}

@@ -8,7 +8,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className='font-mono text-[10px] uppercase tracking-[0.14em] text-folio-muted mb-12 flex items-center gap-3'>
       <span className='shrink-0'>{children}</span>
-      <span className='h-px flex-1 bg-folio-border min-w-[2rem]' aria-hidden />
+      <span className='h-px flex-1 bg-folio-border min-w-8' aria-hidden />
     </p>
   );
 }
@@ -39,7 +39,7 @@ export default function ContactSection() {
               href={mailtoHref(personalInfo.email)}
               className='flex items-center gap-3 text-sm text-folio-fg py-3.5 border-b border-folio-border hover:text-folio-brand transition-colors'
             >
-              <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted w-[60px] shrink-0'>
+              <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted w-[60px] shrink-0'>
                 Email
               </span>
               {personalInfo.email}
@@ -50,7 +50,7 @@ export default function ContactSection() {
               rel='noopener noreferrer'
               className='flex items-center gap-3 text-sm text-folio-fg py-3.5 border-b border-folio-border hover:text-folio-brand transition-colors'
             >
-              <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted w-[60px] shrink-0'>
+              <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted w-[60px] shrink-0'>
                 GitHub
               </span>
               {ghDisplay}
@@ -61,7 +61,7 @@ export default function ContactSection() {
               rel='noopener noreferrer'
               className='flex items-center gap-3 text-sm text-folio-fg py-3.5 border-b border-folio-border hover:text-folio-brand transition-colors'
             >
-              <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted w-[60px] shrink-0'>
+              <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted w-[60px] shrink-0'>
                 LinkedIn
               </span>
               linkedin.com/in/{siteConfig.author.linkedin}
@@ -70,7 +70,7 @@ export default function ContactSection() {
         </div>
         <div className='flex flex-col gap-5 pt-2'>
           <div className='flex flex-col gap-1'>
-            <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted'>
+            <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted'>
               Location
             </span>
             <span className='text-[15px] text-folio-fg tracking-[-0.01em]'>
@@ -78,7 +78,7 @@ export default function ContactSection() {
             </span>
           </div>
           <div className='flex flex-col gap-1'>
-            <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted'>
+            <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted'>
               Education
             </span>
             <span className='text-[15px] text-folio-fg tracking-[-0.01em]'>
@@ -90,7 +90,7 @@ export default function ContactSection() {
             </span>
           </div>
           <div className='flex flex-col gap-1'>
-            <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted'>
+            <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted'>
               Currently
             </span>
             <span className='text-[15px] text-folio-fg tracking-[-0.01em]'>
@@ -98,7 +98,7 @@ export default function ContactSection() {
             </span>
           </div>
           <div className='flex flex-col gap-1'>
-            <span className='font-mono text-[10px] uppercase tracking-[0.1em] text-folio-muted'>
+            <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted'>
               Status
             </span>
             <span className='text-[15px] text-folio-brand tracking-[-0.01em]'>

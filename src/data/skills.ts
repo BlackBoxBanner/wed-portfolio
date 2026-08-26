@@ -1,7 +1,7 @@
+import { FaAws } from 'react-icons/fa';
 import {
-  SiAmazonaws,
   SiCloudflare,
-  SiCss3,
+  SiCss,
   SiDocker,
   SiExpo,
   SiExpress,
@@ -29,7 +29,7 @@ export const frontendSkills: SkillItem[] = [
   { name: 'JavaScript', Icon: SiJavascript, proficiency: 'Advanced' },
   { name: 'TailwindCSS', Icon: SiTailwindcss, proficiency: 'Advanced' },
   { name: 'HTML5', Icon: SiHtml5, proficiency: 'Advanced' },
-  { name: 'CSS3', Icon: SiCss3, proficiency: 'Advanced' },
+  { name: 'CSS3', Icon: SiCss, proficiency: 'Advanced' },
   { name: 'SvelteKit', Icon: SiSvelte, proficiency: 'Intermediate' },
   { name: 'Vue.js', Icon: SiVuedotjs, proficiency: 'Beginner' },
 ];
@@ -52,7 +52,7 @@ export const toolsSkills: SkillItem[] = [
   { name: 'Git', Icon: SiGit, proficiency: 'Advanced' },
   { name: 'GitHub', Icon: SiGithub, proficiency: 'Advanced' },
   { name: 'Docker', Icon: SiDocker, proficiency: 'Beginner' },
-  { name: 'AWS', Icon: SiAmazonaws, proficiency: 'Beginner' },
+  { name: 'AWS', Icon: FaAws, proficiency: 'Beginner' },
   { name: 'Cloudflare', Icon: SiCloudflare, proficiency: 'Beginner' },
 ];
 

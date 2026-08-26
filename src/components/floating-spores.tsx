@@ -15,11 +15,8 @@ interface Spore {
 
 export default function FloatingSpores() {
   const [spores, setSpores] = useState<Spore[]>([]);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     // Create ambient orb-like spores similar to your profile decoration
     const colors = [
       'rgba(99, 102, 241, 0.1)', // Indigo
@@ -55,7 +52,7 @@ export default function FloatingSpores() {
     generateSpores();
   }, []);
 
-  if (!mounted) return null;
+  if (spores.length === 0) return null;
 
   return (
     <div className='fixed inset-0 pointer-events-none z-0 overflow-hidden'>

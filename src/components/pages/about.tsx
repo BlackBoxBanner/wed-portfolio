@@ -49,7 +49,7 @@ const AboutSection = () => {
                 const Icon = driveIcons[drive.icon as keyof typeof driveIcons];
                 return (
                   <div key={drive.title} className='flex items-start gap-3'>
-                    <Icon className='w-5 h-5 text-primary mt-1 flex-shrink-0' />
+                    <Icon className='w-5 h-5 text-primary mt-1 shrink-0' />
                     <Paragraph className='text-lg leading-relaxed'>
                       <strong>{drive.title}</strong> — {drive.detail}
                     </Paragraph>

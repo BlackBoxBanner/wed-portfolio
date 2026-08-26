@@ -5,7 +5,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className='font-mono text-[10px] uppercase tracking-[0.14em] text-folio-muted mb-12 flex items-center gap-3'>
       <span className='shrink-0'>{children}</span>
-      <span className='h-px flex-1 bg-folio-border min-w-[2rem]' aria-hidden />
+      <span className='h-px flex-1 bg-folio-border min-w-8' aria-hidden />
     </p>
   );
 }

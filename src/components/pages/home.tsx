@@ -21,7 +21,7 @@ const IntroductionSection = () => {
       id='introduction'
       className='pt-[120px] pb-16 sm:pt-[140px] sm:pb-24'
     >
-      <div className='grid gap-10 lg:gap-14 lg:grid-cols-[1fr,minmax(200px,280px)] lg:items-start'>
+      <div className='grid gap-10 lg:gap-14 lg:grid-cols-[1fr_minmax(200px,280px)] lg:items-start'>
         <div>
           <p className='font-mono text-[11px] uppercase tracking-[0.12em] text-folio-brand mb-6'>
             Bangkok, Thailand — Open to opportunities
@@ -69,7 +69,7 @@ const IntroductionSection = () => {
         </div>
 
         <div className='flex justify-center lg:justify-end lg:pt-2 lg:sticky lg:top-24'>
-          <div className='relative w-full max-w-[280px] aspect-[4/5] rounded-md overflow-hidden border border-folio-border bg-folio-surface shadow-sm'>
+          <div className='relative w-full max-w-[280px] aspect-4/5 rounded-md overflow-hidden border border-folio-border bg-folio-surface shadow-sm'>
             <Image
               src={PORTRAIT_PATH}
               alt={personalInfo.name}

@@ -1,6 +1,186 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --font-sans:
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+
+  --color-folio-bg: oklch(99% 0.002 240);
+  --color-folio-surface: oklch(100% 0 0);
+  --color-folio-fg: oklch(18% 0.012 250);
+  --color-folio-muted: oklch(54% 0.012 250);
+  --color-folio-border: oklch(92% 0.005 250);
+  --color-folio-brand: oklch(58% 0.18 255);
+  --color-folio-success: oklch(60% 0.12 145);
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+@utility custom-scrollbar {
+  /* Custom scrollbar styling for webkit browsers */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-foreground/50;
+  }
+}
+
+@utility prose-folio {
+  /* Blog / MDX — matches body (15px), folio palette, and section heading rhythm */
+  @apply prose max-w-none text-[15px] leading-relaxed text-folio-fg;
+  @apply prose-headings:font-semibold prose-headings:text-folio-fg;
+  @apply prose-h1:text-[clamp(1.375rem,3vw,1.75rem)] prose-h1:tracking-[-0.03em] prose-h1:font-semibold prose-h1:mt-10 prose-h1:mb-4;
+  @apply prose-h2:text-xl sm:prose-h2:text-[1.375rem] prose-h2:tracking-[-0.02em] prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-28;
+  @apply prose-h3:text-[1.0625rem] prose-h3:tracking-tight prose-h3:mt-8 prose-h3:mb-3 prose-h3:scroll-mt-28;
+  @apply prose-h4:text-[15px] prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2;
+  @apply prose-p:text-folio-muted prose-p:leading-relaxed prose-p:mb-4;
+  @apply prose-li:text-folio-muted prose-li:leading-relaxed prose-li:my-1;
+  @apply prose-ul:my-4 prose-ol:my-4 prose-ul:pl-5 prose-ol:pl-5;
+  @apply prose-strong:text-folio-fg prose-strong:font-semibold;
+  @apply prose-a:text-folio-brand prose-a:font-medium prose-a:no-underline prose-a:hover:underline;
+  @apply prose-blockquote:border-l-2 prose-blockquote:border-folio-border prose-blockquote:pl-4 prose-blockquote:text-folio-muted prose-blockquote:not-italic prose-blockquote:my-4;
+  @apply prose-code:rounded prose-code:border prose-code:border-folio-border prose-code:bg-folio-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-mono prose-code:text-folio-fg prose-code:before:content-none prose-code:after:content-none;
+  @apply prose-pre:rounded-md prose-pre:text-[13px] prose-pre:leading-relaxed prose-pre:font-mono prose-pre:border prose-pre:border-[#30363d] prose-pre:bg-[#0d1117] prose-pre:text-[#e6edf3] prose-pre:shadow-inner;
+  @apply prose-hr:border-folio-border prose-hr:my-10;
+  @apply prose-img:rounded-md prose-img:border prose-img:border-folio-border;
+  @apply prose-figcaption:text-[13px] prose-figcaption:text-folio-muted prose-figcaption:mt-2;
+  @apply prose-table:text-[15px] prose-table:border prose-table:border-folio-border prose-table:rounded-md prose-table:overflow-hidden;
+  @apply prose-thead:border-b prose-thead:border-folio-border prose-th:bg-folio-surface prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-th:text-folio-fg;
+  @apply prose-td:border-t prose-td:border-folio-border prose-td:px-3 prose-td:py-2 prose-td:text-folio-muted;
+
+  & > :first-child:is(h1, h2, h3, h4) {
+    @apply mt-0;
+  }
+
+  & pre code {
+    @apply border-0 bg-transparent p-0 text-inherit;
+  }
+
+  /* Let panel bg show through; hljs theme supplies token colors */
+  & pre code.hljs {
+    background-color: transparent !important;
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+@utility animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@utility animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@utility animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+@utility animate-float-gentle {
+  animation: floatGentle infinite ease-in-out;
+}
 
 /* ============================================
    CSS CUSTOM PROPERTIES & THEMING
@@ -99,88 +279,6 @@
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
-  }
-}
-
-/* ============================================
-   COMPONENT STYLES
-   ============================================ */
-
-@layer components {
-  /* Custom scrollbar styling for webkit browsers */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground rounded-full;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-foreground/50;
-  }
-
-  /* Blog / MDX — matches body (15px), folio palette, and section heading rhythm */
-  .prose-folio {
-    @apply prose max-w-none text-[15px] leading-relaxed text-folio-fg;
-    @apply prose-headings:font-semibold prose-headings:text-folio-fg;
-    @apply prose-h1:text-[clamp(1.375rem,3vw,1.75rem)] prose-h1:tracking-[-0.03em] prose-h1:font-semibold prose-h1:mt-10 prose-h1:mb-4;
-    @apply prose-h2:text-xl prose-h2:sm:text-[1.375rem] prose-h2:tracking-[-0.02em] prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-28;
-    @apply prose-h3:text-[1.0625rem] prose-h3:tracking-tight prose-h3:mt-8 prose-h3:mb-3 prose-h3:scroll-mt-28;
-    @apply prose-h4:text-[15px] prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2;
-    @apply prose-p:text-folio-muted prose-p:leading-relaxed prose-p:mb-4;
-    @apply prose-li:text-folio-muted prose-li:leading-relaxed prose-li:my-1;
-    @apply prose-ul:my-4 prose-ol:my-4 prose-ul:pl-5 prose-ol:pl-5;
-    @apply prose-strong:text-folio-fg prose-strong:font-semibold;
-    @apply prose-a:text-folio-brand prose-a:font-medium prose-a:no-underline hover:prose-a:underline;
-    @apply prose-blockquote:border-l-2 prose-blockquote:border-folio-border prose-blockquote:pl-4 prose-blockquote:text-folio-muted prose-blockquote:not-italic prose-blockquote:my-4;
-    @apply prose-code:rounded prose-code:border prose-code:border-folio-border prose-code:bg-folio-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-mono prose-code:text-folio-fg prose-code:before:content-none prose-code:after:content-none;
-    @apply prose-pre:rounded-md prose-pre:text-[13px] prose-pre:leading-relaxed prose-pre:font-mono prose-pre:border prose-pre:border-[#30363d] prose-pre:bg-[#0d1117] prose-pre:text-[#e6edf3] prose-pre:shadow-inner;
-    @apply prose-hr:border-folio-border prose-hr:my-10;
-    @apply prose-img:rounded-md prose-img:border prose-img:border-folio-border;
-    @apply prose-figcaption:text-[13px] prose-figcaption:text-folio-muted prose-figcaption:mt-2;
-    @apply prose-table:text-[15px] prose-table:border prose-table:border-folio-border prose-table:rounded-md prose-table:overflow-hidden;
-    @apply prose-thead:border-b prose-thead:border-folio-border prose-th:bg-folio-surface prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-th:text-folio-fg;
-    @apply prose-td:border-t prose-td:border-folio-border prose-td:px-3 prose-td:py-2 prose-td:text-folio-muted;
-  }
-
-  .prose-folio > :first-child:is(h1, h2, h3, h4) {
-    @apply mt-0;
-  }
-
-  .prose-folio pre code {
-    @apply border-0 bg-transparent p-0 text-inherit;
-  }
-
-  /* Let panel bg show through; hljs theme supplies token colors */
-  .prose-folio pre code.hljs {
-    background-color: transparent !important;
-  }
-}
-
-/* ============================================
-   ANIMATION UTILITIES
-   ============================================ */
-
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
-
-  .animate-slide-in-right {
-    animation: slideInRight 0.6s ease-out;
-  }
-
-  .animate-float-gentle {
-    animation: floatGentle infinite ease-in-out;
   }
 }
 
