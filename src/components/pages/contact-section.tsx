@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { personalInfo } from '@/data';
 import { educationKMUTT } from '@/data/education';
+import { SectionMark } from '@/components/motion/section-mark';
 import { mailtoHref } from '@/lib/mailto';
 import { siteConfig } from '@/lib/metadata';
 
@@ -20,11 +21,12 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='py-16 sm:py-20 border-t border-folio-border'
+      className='relative overflow-x-clip scroll-mt-20 py-16 sm:py-20 border-t border-folio-border'
     >
+      <SectionMark label='CONTACT' />
       <SectionLabel>Contact</SectionLabel>
       <div className='grid md:grid-cols-2 gap-12 md:gap-20 items-start'>
-        <div>
+        <div data-motion='cascade-item' className='motion-reveal'>
           <h2 className='text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] leading-tight text-folio-fg mb-4'>
             Open to new
             <br />
@@ -68,7 +70,10 @@ export default function ContactSection() {
             </a>
           </div>
         </div>
-        <div className='flex flex-col gap-5 pt-2'>
+        <div
+          data-motion='cascade-item'
+          className='motion-reveal flex flex-col gap-5 pt-2'
+        >
           <div className='flex flex-col gap-1'>
             <span className='font-mono text-[10px] uppercase tracking-widest text-folio-muted'>
               Location

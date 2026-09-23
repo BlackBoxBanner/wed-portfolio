@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SectionMark } from '@/components/motion/section-mark';
 import { getAllBlogPosts, formatDate } from '@/lib/blog/utils';
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,11 @@ export default function BlogSection() {
   const posts = getAllBlogPosts().slice(0, 3);
 
   return (
-    <section id='blog' className='py-16 sm:py-20 border-t border-folio-border'>
+    <section
+      id='blog'
+      className='relative overflow-x-clip scroll-mt-20 py-16 sm:py-20 border-t border-folio-border'
+    >
+      <SectionMark label='WRITING' />
       <SectionLabel>Writing</SectionLabel>
       {posts.length > 0 ? (
         <>
@@ -23,7 +28,8 @@ export default function BlogSection() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className='bg-folio-bg p-7 flex flex-col gap-3 text-inherit hover:bg-folio-surface transition-colors min-h-[180px]'
+                data-motion='cascade-item'
+                className='motion-reveal bg-folio-bg p-7 flex flex-col gap-3 text-inherit hover:bg-folio-surface transition-colors min-h-[180px]'
               >
                 <p className='font-mono text-[10px] uppercase tracking-[0.12em] text-folio-brand'>
                   {post.tags?.[0] ?? 'Article'}

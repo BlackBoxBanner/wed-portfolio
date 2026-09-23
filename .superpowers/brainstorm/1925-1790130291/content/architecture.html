@@ -1,0 +1,70 @@
+<h2>Architecture — look right so far?</h2>
+<p class="subtitle">
+  Landing-only client motion layer. Existing section components stay; we add
+  depth + GSAP orchestration. Reply yes to approve this section, or say what to
+  change.
+</p>
+
+<div class="section">
+  <p class="label">Locked decisions</p>
+  <ul>
+    <li>Scope: <strong>/</strong> only</li>
+    <li>Feel: high-drama Full cinema (Intro + Projects pins)</li>
+    <li>Depth: giant section marks + folio-blue soft orbs</li>
+    <li>Stack: existing GSAP + ScrollTrigger (no Lenis)</li>
+  </ul>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">Component map</div>
+  <div
+    class="mockup-body"
+    style="
+      padding: 1.25rem;
+      font:
+        13px/1.5 ui-monospace,
+        monospace;
+      color: #334;
+    "
+  >
+    <pre style="margin: 0; white-space: pre-wrap">
+page.tsx
+  ├── LandingMotionProvider   (client, reduced-motion gate)
+  ├── AmbientDepthLayer       (fixed orbs + scroll parallax)
+  └── max-w content column
+        ├── IntroductionSection  + pin/scrub timeline + name watermark
+        ├── WorkSection          + mark + stagger rows
+        ├── ProjectSection       + pin/scrub project beats
+        ├── SkillSection         + cascade cells
+        ├── BlogSection          + cascade
+        └── ContactSection       + closing reveal
+
+Shared helpers
+  · useGsapContext / cleanup ScrollTriggers
+  · SectionMark (oversized faded label)
+  · data-animate hooks on existing markup
+
+Replace unused scrollToView.tsx with real scrub timelines
+Retheme floating-spores → folio-blue AmbientDepthLayer</pre
+    >
+  </div>
+</div>
+
+<div class="pros-cons" style="margin-top: 1.25rem">
+  <div class="pros">
+    <h4>Includes</h4>
+    <ul>
+      <li>prefers-reduced-motion → no pins/parallax</li>
+      <li>Mobile: drop or shorten pins; keep reveals</li>
+      <li>Hash nav still works with header offset</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>Out of scope</h4>
+    <ul>
+      <li>Blog / CV pages</li>
+      <li>New project images</li>
+      <li>Lenis / redesign / dark mode</li>
+    </ul>
+  </div>
+</div>

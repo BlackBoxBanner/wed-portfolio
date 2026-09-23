@@ -1,5 +1,6 @@
 import { experiences } from '@/data';
 import type { ExperienceType } from '@/data';
+import { SectionMark } from '@/components/motion/section-mark';
 import { cn } from '@/lib/utils';
 
 function formatPeriod(exp: ExperienceType): string {
@@ -22,16 +23,21 @@ const WorkSection = () => {
   return (
     <section
       id='experience'
-      className='py-16 sm:py-20 border-t border-folio-border'
+      className='relative overflow-x-clip scroll-mt-20 py-16 sm:py-20 border-t border-folio-border'
     >
+      <SectionMark label='EXPERIENCE' />
       <SectionLabel>Experience</SectionLabel>
       <div className='flex flex-col'>
         {experiences.map((exp) => (
           <article
             key={`${exp.company}-${exp.title}-${exp.fromYear}`}
-            className='grid sm:grid-cols-[200px_1fr] gap-6 sm:gap-10 py-8 border-b border-folio-border last:border-b-0 first:pt-0'
+            data-motion='experience-row'
+            className='motion-reveal grid sm:grid-cols-[200px_1fr] gap-6 sm:gap-10 py-8 border-b border-folio-border last:border-b-0 first:pt-0'
           >
-            <div className='flex flex-col gap-1.5 sm:flex-col'>
+            <div
+              className='flex flex-col gap-1.5 sm:flex-col'
+              data-motion='experience-date'
+            >
               <span className='font-mono text-[11px] text-folio-muted tracking-[0.04em] tabular-nums'>
                 {formatPeriod(exp)}
               </span>

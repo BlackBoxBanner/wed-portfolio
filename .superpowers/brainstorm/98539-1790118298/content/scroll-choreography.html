@@ -1,0 +1,115 @@
+<h2>Scroll choreography — does this drama feel right?</h2>
+<p class="subtitle">
+  Landing only · GSAP ScrollTrigger · same folio UI + ambient depth. Click the
+  intensity that matches “high drama” for you.
+</p>
+
+<div class="options">
+  <div class="option" data-choice="full-cinema" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Full cinema (recommended)</h3>
+      <p>
+        Two pinned set-pieces (Intro + Projects) with scrubbed timelines, plus
+        parallax depth and staggered reveals on every other section.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="one-pin" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>One signature pin</h3>
+      <p>
+        Only Intro is pinned/scrubbed as the hero moment; other sections get
+        strong parallax + stagger, but no second pin.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="continuous" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Continuous scrub, no pins</h3>
+      <p>
+        No section locking — everything moves in layered parallax as you scroll.
+        Still dramatic, less “stuck” feel.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="label">Storyboard — Full cinema (A)</p>
+  <div class="mockup">
+    <div class="mockup-header">Landing scroll journey</div>
+    <div
+      class="mockup-body"
+      style="
+        padding: 1.25rem;
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 1.55;
+        color: #334;
+      "
+    >
+      <div
+        style="
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          background: #fafafa;
+        "
+      >
+        <strong style="color: #1a1a2e">1 · INTRO (pinned ~120vh)</strong><br />
+        Oversized faded name watermark drifts up slower than copy<br />
+        Soft folio-blue ambient orbs parallax behind content<br />
+        Headline lines scrub in; portrait scales/drifts opposite copy<br />
+        Stats + CTAs stagger last → release pin
+      </div>
+      <div
+        style="
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+        "
+      >
+        <strong style="color: #1a1a2e">2 · EXPERIENCE</strong><br />
+        Section mark “EXPERIENCE” giant + dim, Y parallax<br />
+        Timeline rows scrub in from below with opacity
+      </div>
+      <div
+        style="
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          background: #fafafa;
+        "
+      >
+        <strong style="color: #1a1a2e">3 · PROJECTS (pinned ~150vh)</strong
+        ><br />
+        Sticky panel / list crossfade as scrub advances<br />
+        Background plane + section mark move at different rates<br />
+        Each project “beats” on scrub progress
+      </div>
+      <div
+        style="
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+        "
+      >
+        <strong style="color: #1a1a2e">4 · SKILLS / BLOG / CONTACT</strong
+        ><br />
+        Grid cells / cards cascade in; contact closes with strong fade-up<br />
+        Ambient layer continues under everything
+      </div>
+      <p style="margin: 0; opacity: 0.7">
+        Mobile: shorten or drop pins; keep parallax + reveals. Respect
+        prefers-reduced-motion → static.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { skillCategories } from '@/data';
 import type { SkillCategory as SkillCategoryType, SkillLevel } from '@/data';
+import { SectionMark } from '@/components/motion/section-mark';
 import { cn } from '@/lib/utils';
 
 type SkillLine = { name: string; proficiency: SkillLevel };
@@ -58,7 +59,7 @@ function SkillGroup({ category }: { category: SkillCategoryType }) {
   const shortTitle = category.title.replace(' Development', '');
 
   return (
-    <div className='bg-folio-bg p-7'>
+    <div data-motion='cascade-item' className='motion-reveal bg-folio-bg p-7'>
       <p className='font-mono text-[10px] uppercase tracking-[0.12em] text-folio-brand mb-4'>
         {shortTitle}
       </p>
@@ -75,8 +76,9 @@ const SkillSection = () => {
   return (
     <section
       id='skills'
-      className='py-16 sm:py-20 border-t border-folio-border'
+      className='relative overflow-x-clip scroll-mt-20 py-16 sm:py-20 border-t border-folio-border'
     >
+      <SectionMark label='SKILLS' />
       <SectionLabel>Skills & Stack</SectionLabel>
       <div className='grid sm:grid-cols-2 border border-folio-border bg-folio-border gap-px'>
         {skillCategories.map((cat) => (

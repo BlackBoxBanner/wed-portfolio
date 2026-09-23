@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { projects } from '@/data';
 import type { ProjectType } from '@/data';
+import { SectionMark } from '@/components/motion/section-mark';
 import { cn } from '@/lib/utils';
 
 const SHOWCASE_TITLES = [
@@ -34,8 +35,9 @@ const ProjectSection = () => {
   return (
     <section
       id='projects'
-      className='py-16 sm:py-20 border-t border-folio-border'
+      className='relative overflow-x-clip scroll-mt-20 py-16 sm:py-20 border-t border-folio-border'
     >
+      <SectionMark label='PROJECTS' />
       <SectionLabel>Selected Projects</SectionLabel>
       <div className='flex flex-col'>
         {showcaseProjects.map((project, index) => {
@@ -48,10 +50,14 @@ const ProjectSection = () => {
           return (
             <article
               key={project.title}
-              className='grid lg:grid-cols-[1fr_280px] gap-8 lg:gap-16 py-10 border-b border-folio-border last:border-b-0 items-start'
+              data-motion='project-item'
+              className='motion-reveal grid lg:grid-cols-[1fr_280px] gap-8 lg:gap-16 py-10 border-b border-folio-border last:border-b-0 items-start'
             >
               <div>
-                <p className='font-mono text-[11px] text-folio-border mb-4 tabular-nums tracking-[0.04em]'>
+                <p
+                  data-motion='project-num'
+                  className='font-mono text-[11px] text-folio-border mb-4 tabular-nums tracking-[0.04em]'
+                >
                   {num}
                 </p>
                 <h2 className='text-[clamp(1.375rem,3vw,1.875rem)] font-semibold tracking-[-0.03em] text-folio-fg mb-3 leading-tight'>
