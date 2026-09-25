@@ -12,13 +12,13 @@ export function parallaxMark(
   );
   if (!mark) return;
 
-  const from = range.from ?? 35;
-  const to = range.to ?? -55;
+  const from = range.from ?? 90;
+  const to = range.to ?? -140;
   const x = range.x ?? 0;
 
   gsapApi.fromTo(
     mark,
-    { yPercent: from, xPercent: x ? -x : 0, scale: 1.05 },
+    { yPercent: from, xPercent: x ? -x : 0, scale: 1.12 },
     {
       yPercent: to,
       xPercent: x,

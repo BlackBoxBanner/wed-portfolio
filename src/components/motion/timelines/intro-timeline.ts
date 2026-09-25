@@ -1,5 +1,8 @@
 import type gsap from 'gsap';
-import { isDesktopPin } from '@/components/motion/timelines/shared';
+import {
+  isDesktopPin,
+  parallaxLayers,
+} from '@/components/motion/timelines/shared';
 
 /**
  * Cinematic intro: pinned scrub on desktop — watermark, copy, and portrait
@@ -25,6 +28,9 @@ export function createIntroTimeline(gsapApi: typeof gsap, root: HTMLElement) {
   const metaEls = gsapApi.utils.toArray<HTMLElement>(
     section.querySelectorAll('[data-motion="intro-meta"]'),
   );
+  const stats = gsapApi.utils.toArray<HTMLElement>(
+    section.querySelectorAll('[data-motion="intro-stat"]'),
+  );
 
   // Enter: CSS class stagger
   const hero = [...lineEls, ...metaEls, ...(portrait ? [portrait] : [])];
@@ -49,36 +55,30 @@ export function createIntroTimeline(gsapApi: typeof gsap, root: HTMLElement) {
   if (watermark) {
     tl.fromTo(
       watermark,
-      { yPercent: 8, xPercent: -4, scale: 1.08 },
-      { yPercent: -42, xPercent: 6, scale: 0.92, ease: 'none' },
+      { yPercent: 15, xPercent: -10, scale: 1.18 },
+      { yPercent: -110, xPercent: 16, scale: 0.88, ease: 'none' },
       0,
     );
   }
 
   if (copy) {
-    tl.fromTo(
-      copy,
-      { y: 0 },
-      { y: pin ? -80 : -40, ease: 'none' },
-      0,
-    );
+    tl.fromTo(copy, { y: 0 }, { y: pin ? -200 : -100, ease: 'none' }, 0);
   }
 
   if (portraitWrap) {
     tl.fromTo(
       portraitWrap,
-      { y: 40, rotate: -1.5 },
-      { y: pin ? -120 : -60, rotate: 1.5, ease: 'none' },
+      { y: 80, rotate: -3.5 },
+      { y: pin ? -280 : -140, rotate: 3.5, ease: 'none' },
       0,
     );
   }
 
   if (portrait) {
-    tl.fromTo(
-      portrait,
-      { scale: 1.08 },
-      { scale: 1, ease: 'none' },
-      0,
-    );
+    tl.fromTo(portrait, { scale: 1.16 }, { scale: 1, ease: 'none' }, 0);
+  }
+
+  if (stats.length) {
+    parallaxLayers(gsapApi, stats, section, [70, 95, 80, 110]);
   }
 }

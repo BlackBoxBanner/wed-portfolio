@@ -33,15 +33,15 @@ export function LandingMotionRoot({ children }: { children: ReactNode }) {
             const speed = Number(el.dataset.speed ?? 0.15);
             gsap.fromTo(
               el,
-              { y: 120 * speed * 8 },
+              { y: 120 * speed * 20 },
               {
-                y: -ScrollTrigger.maxScroll(window) * speed * 0.85,
+                y: -ScrollTrigger.maxScroll(window) * speed * 2.2,
                 ease: 'none',
                 scrollTrigger: {
                   trigger: document.documentElement,
                   start: 'top top',
                   end: 'bottom bottom',
-                  scrub: 0.4,
+                  scrub: 0.35,
                 },
               },
             );

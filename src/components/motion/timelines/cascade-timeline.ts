@@ -9,9 +9,9 @@ export function createCascadeTimeline(gsapApi: typeof gsap, root: HTMLElement) {
     if (!section) return;
 
     parallaxMark(gsapApi, section, {
-      from: 30,
-      to: -50,
-      x: sectionIndex % 2 === 0 ? 6 : -6,
+      from: 80,
+      to: -135,
+      x: sectionIndex % 2 === 0 ? 16 : -16,
     });
 
     const items = gsapApi.utils.toArray<HTMLElement>(
@@ -22,14 +22,14 @@ export function createCascadeTimeline(gsapApi: typeof gsap, root: HTMLElement) {
       stagger: 0.09,
     });
 
-    // Gentle opposing drift on cascade cards while section is in view
+    // Opposing drift on cascade cards while section is in view
     items.forEach((item, i) => {
       const dir = i % 2 === 0 ? 1 : -1;
       gsapApi.fromTo(
         item,
-        { y: 24 * dir },
+        { y: 65 * dir },
         {
-          y: -24 * dir,
+          y: -65 * dir,
           ease: 'none',
           scrollTrigger: {
             trigger: item,

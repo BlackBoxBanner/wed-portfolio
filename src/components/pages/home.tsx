@@ -82,7 +82,11 @@ const IntroductionSection = () => {
             className='motion-reveal-hero mt-16 pt-8 border-t border-folio-border flex flex-wrap gap-8 sm:gap-10'
           >
             {stats.map((s) => (
-              <div key={s.label} className='flex flex-col gap-1'>
+              <div
+                key={s.label}
+                data-motion='intro-stat'
+                className='flex flex-col gap-1'
+              >
                 <span className='font-mono text-[22px] font-semibold tracking-[-0.02em] text-folio-fg tabular-nums'>
                   {s.value}
                 </span>

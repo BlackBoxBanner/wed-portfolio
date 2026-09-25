@@ -1,9 +1,13 @@
 import type gsap from 'gsap';
-import { parallaxMark, revealOnce } from '@/components/motion/timelines/shared';
+import {
+  parallaxMark,
+  parallaxLayers,
+  revealOnce,
+} from '@/components/motion/timelines/shared';
 
 /**
  * Smooth projects motion — no pin, no competing transforms on articles.
- * Soft section-mark parallax + staggered CSS enter reveals.
+ * Strong section-mark parallax + project-num layers + staggered CSS enter reveals.
  */
 export function createProjectsTimeline(
   gsapApi: typeof gsap,
@@ -24,7 +28,11 @@ export function createProjectsTimeline(
     clearProps: 'transform,translate,scale,x,y,rotation',
   });
 
-  parallaxMark(gsapApi, section, { from: 18, to: -32, x: -2 });
+  parallaxMark(gsapApi, section, { from: 50, to: -90, x: -6 });
+
+  if (nums.length) {
+    parallaxLayers(gsapApi, nums, section, [55, 75, 65, 90]);
+  }
 
   if (!items.length) return;
 

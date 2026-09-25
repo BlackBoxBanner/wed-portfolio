@@ -12,7 +12,7 @@ export function createExperienceTimeline(
   const section = root.querySelector<HTMLElement>('#experience');
   if (!section) return;
 
-  parallaxMark(gsapApi, section, { from: 40, to: -70, x: 8 });
+  parallaxMark(gsapApi, section, { from: 100, to: -180, x: 20 });
 
   const rows = gsapApi.utils.toArray<HTMLElement>(
     section.querySelectorAll('[data-motion="experience-row"]'),
@@ -22,5 +22,5 @@ export function createExperienceTimeline(
   const dates = gsapApi.utils.toArray<HTMLElement>(
     section.querySelectorAll('[data-motion="experience-date"]'),
   );
-  parallaxLayers(gsapApi, dates, section, [28, 42, 36, 50]);
+  parallaxLayers(gsapApi, dates, section, [70, 105, 90, 125]);
 }

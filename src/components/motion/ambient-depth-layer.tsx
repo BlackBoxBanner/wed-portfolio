@@ -1,11 +1,11 @@
 'use client';
 
 const ORBS = [
-  { left: '-5%', top: '5%', size: 420, speed: 0.08, opacity: 0.14 },
-  { left: '70%', top: '8%', size: 320, speed: 0.18, opacity: 0.11 },
-  { left: '10%', top: '45%', size: 380, speed: 0.14, opacity: 0.12 },
-  { left: '75%', top: '55%', size: 280, speed: 0.26, opacity: 0.1 },
-  { left: '40%', top: '78%', size: 360, speed: 0.2, opacity: 0.09 },
+  { left: '-5%', top: '5%', size: 420, speed: 0.2, opacity: 0.14 },
+  { left: '70%', top: '8%', size: 320, speed: 0.45, opacity: 0.11 },
+  { left: '10%', top: '45%', size: 380, speed: 0.35, opacity: 0.12 },
+  { left: '75%', top: '55%', size: 280, speed: 0.65, opacity: 0.1 },
+  { left: '40%', top: '78%', size: 360, speed: 0.5, opacity: 0.09 },
 ] as const;
 
 /** Large soft depth orbs — ScrollTrigger owned by LandingMotionRoot. */
@@ -34,12 +34,12 @@ export function AmbientDepthLayer() {
       {/* Cinematic horizon planes */}
       <div
         data-motion='plane'
-        data-speed='0.1'
+        data-speed='0.28'
         className='absolute -left-[20%] top-[18%] h-[40vh] w-[140%] rotate-[-4deg] bg-gradient-to-r from-folio-brand/[0.07] via-transparent to-folio-brand/[0.04]'
       />
       <div
         data-motion='plane'
-        data-speed='0.22'
+        data-speed='0.55'
         className='absolute -left-[10%] top-[58%] h-[32vh] w-[140%] rotate-[3deg] bg-gradient-to-r from-transparent via-folio-brand/[0.06] to-transparent'
       />
     </div>
